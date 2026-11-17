@@ -141,16 +141,20 @@ class Registry:
             grounded.append(GroundAction(step.tool, args, template.param_types))
         return tuple(grounded)
 
-    def unique_failure(self, state: WorldState, tool: str):
+    def unique_failure(self, state: WorldState, tool: str, provenance: bool = True):
         found = [item for item in state.failures if item.tool == tool]
-        if len(found) != 1:
+        if provenance:
+            if len(found) != 1:
+                return None
+            return found[0]
+        if not found:
             return None
-        return found[0]
+        return found[-1]
 
-    def bind(self, rule: Rule, state: WorldState) -> dict[str, str] | None:
+    def bind(self, rule: Rule, state: WorldState, provenance: bool = True) -> dict[str, str] | None:
         binding: dict[str, str] = {}
         for source in rule.bindings:
-            value = self._bind_one(source, state)
+            value = self._bind_one(source, state, provenance)
             if value is None:
                 return None
             if source.variable in binding and binding[source.variable] != value:
@@ -165,10 +169,10 @@ class Registry:
             return None
         return binding
 
-    def _bind_one(self, source: BindingSource, state: WorldState) -> str | None:
+    def _bind_one(self, source: BindingSource, state: WorldState, provenance: bool = True) -> str | None:
         if source.origin == "action_arg":
             tool, index_text = source.detail.split(":", 1)
-            failure = self.unique_failure(state, tool)
+            failure = self.unique_failure(state, tool, provenance)
             if failure is None:
                 return None
             index = int(index_text)
@@ -181,9 +185,11 @@ class Registry:
                 entity = state.entity(entity_id)
                 if entity is not None and entity.type_name == source.type_name:
                     matches.append(entity_id)
-            if len(matches) != 1:
+            if provenance and len(matches) != 1:
                 return None
-            return matches[0]
+            if not matches:
+                return None
+            return sorted(matches)[0]
         if source.origin == "examined":
             if state.examined is None:
                 return None
@@ -195,7 +201,9 @@ class Registry:
             return source.detail
         return None
 
-    def binding_still_valid(self, rule: Rule, binding: dict[str, str], state: WorldState) -> bool:
+    def binding_still_valid(
+        self, rule: Rule, binding: dict[str, str], state: WorldState, provenance: bool = True
+    ) -> bool:
         for source in rule.bindings:
             value = binding.get(source.variable)
             if value is None:
@@ -207,7 +215,7 @@ class Registry:
             entity = state.entity(value)
             if entity is None or entity.type_name != source.type_name:
                 return False
-        rebound = self.bind(rule, state)
+        rebound = self.bind(rule, state, provenance)
         return rebound == binding
 
     def binding_field_names(self, source: BindingSource) -> tuple[str, ...]:

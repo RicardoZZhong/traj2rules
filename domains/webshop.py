@@ -142,25 +142,49 @@ def sample_episodes(registry: Registry | None = None) -> list[Episode]:
     ]
 
 
+def purchase_matches(goal: dict, entity) -> bool:
+    """最终购买对照目标中的全部属性。拒绝规则只检查自己注册的那一项。"""
+    if entity is None:
+        return False
+    checked = False
+    if "quantity" in goal:
+        checked = True
+        required = parse_quantity(goal["quantity"])
+        observed = parse_quantity(entity.get("quantity"))
+        if required is None or observed is None or abs(required - observed) >= 1e-9:
+            return False
+    for key, required in goal.items():
+        if key in {"quantity", "description"}:
+            continue
+        checked = True
+        observed = entity.get(key, "")
+        if observed == "" or observed.lower() != str(required).lower():
+            return False
+    return checked
+
+
+def _option_attrs(spec) -> dict:
+    if spec is None:
+        return {}
+    if isinstance(spec, str):
+        return {"quantity": spec}
+    return {str(key): str(value) for key, value in spec.items()}
+
+
 class WebShopEnv:
-    def __init__(self, quantities=("twelve-pack", "6")):
+    def __init__(self, quantities=("twelve-pack", "6"), goal=(("quantity", "6"),)):
         self.quantities = tuple(quantities)
+        self.goal = tuple(goal)
         self.purchased = None
 
     def snapshot(self) -> WorldState:
         entities = []
         visible = []
-        for index, quantity in enumerate(self.quantities):
+        for index, spec in enumerate(self.quantities):
             entity_id = f"opt{index}"
-            attrs = {} if quantity is None else {"quantity": quantity}
-            entities.append(make_entity(entity_id, "option", **attrs))
+            entities.append(make_entity(entity_id, "option", **_option_attrs(spec)))
             visible.append(entity_id)
-        return WorldState(
-            "webshop",
-            (("quantity", "6"),),
-            tuple(entities),
-            tuple(visible),
-        )
+        return WorldState("webshop", self.goal, tuple(entities), tuple(visible))
 
     def reset(self) -> WorldState:
         return self.snapshot()
@@ -169,8 +193,7 @@ class WebShopEnv:
         self.purchased = action.args[0] if action.args else None
         state = self.snapshot()
         entity = state.entity(self.purchased) if self.purchased else None
-        parsed = None if entity is None else parse_quantity(entity.get("quantity"))
-        success = parsed is not None and abs(parsed - 6.0) < 1e-9
+        success = purchase_matches(dict(self.goal), entity)
         feedback = Feedback(
             "confirm" if success else "reject",
             "purchased" if success else None,

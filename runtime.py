@@ -47,6 +47,11 @@ class RunResult:
     aborted: int
     actions: tuple[GroundAction, ...]
     history: tuple[tuple[GroundAction, Feedback], ...] = ()
+    request_events: tuple = ()
+    program_started: int = 0
+    program_completed: int = 0
+    program_aborted: int = 0
+    terminal_rule_actions: int = 0
 
 
 def freeze_binding(binding: dict[str, str]) -> tuple:
@@ -65,8 +70,10 @@ def prepare_library(rules, registry: Registry) -> list[Rule]:
     return prepared
 
 
-def resumption_ok(resumption: Resumption, registry: Registry, state: WorldState) -> bool:
-    if not registry.binding_still_valid(resumption.rule, resumption.binding, state):
+def resumption_ok(
+    resumption: Resumption, registry: Registry, state: WorldState, provenance: bool = True
+) -> bool:
+    if not registry.binding_still_valid(resumption.rule, resumption.binding, state, provenance):
         return False
     step = resumption.rule.program[resumption.stage]
     return registry.stage_status(step, resumption.binding, state) is Tri.TRUE
@@ -99,12 +106,12 @@ def compatible(records: list[Support]) -> bool:
     return len(keys) == 1
 
 
-def rejection_fires(rules, registry, state, action, unknown_as_true: bool) -> bool:
+def rejection_fires(rules, registry, state, action, unknown_as_true: bool, provenance: bool = True) -> bool:
     context = state.with_examined(action)
     for rule in rules:
         if rule.tau != "reject":
             continue
-        binding = registry.bind(rule, context)
+        binding = registry.bind(rule, context, provenance)
         if binding is None:
             continue
         grounded = registry.ground_program(rule, binding)
@@ -128,6 +135,7 @@ def resolve(
     rejected,
     disabled,
     unknown_as_true: bool = False,
+    provenance: bool = True,
 ):
     """返回唯一且校验器兼容的动作。本函数不向环境提交动作，也不推进恢复记录。"""
     supports: list[Support] = []
@@ -135,7 +143,7 @@ def resolve(
     for resumption in resumptions:
         if proposal is not None and resumption.final_action != proposal:
             continue
-        if not resumption_ok(resumption, registry, state):
+        if not resumption_ok(resumption, registry, state, provenance):
             continue
         if _disabled(
             disabled,
@@ -160,7 +168,7 @@ def resolve(
     for rule in rules:
         if rule.tau != "exec":
             continue
-        binding = registry.bind(rule, state)
+        binding = registry.bind(rule, state, provenance)
         if binding is None:
             continue
         canon = serialize(rule)
@@ -187,7 +195,7 @@ def resolve(
     if proposal is not None and proposal not in seen:
         examined.append(proposal)
     for action in examined:
-        if rejection_fires(rules, registry, state, action, unknown_as_true):
+        if rejection_fires(rules, registry, state, action, unknown_as_true, provenance):
             rejected_set.add(action)
 
     available: dict[GroundAction, list[Support]] = {}
@@ -250,6 +258,14 @@ def _advance(records: list[Support], registry: Registry) -> list[Resumption]:
     return pending
 
 
+def _request_reason(invalid_before: bool, conflict_before: bool) -> str:
+    if conflict_before:
+        return "conflict_reselection"
+    if invalid_before:
+        return "format_retry"
+    return "initial_proposal"
+
+
 def run_task(
     env,
     policy,
@@ -261,6 +277,8 @@ def run_task(
     step_limit: int,
     unknown_as_true: bool = False,
     stepwise: bool = True,
+    provenance: bool = True,
+    allow_precall: bool = True,
     mode: str = "rules",
 ) -> RunResult:
     library = [] if mode != "rules" else prepare_library(rules, registry)
@@ -272,7 +290,9 @@ def run_task(
     force_model = False
     requests = precall = repairs = post_call_same = 0
     rejections = rule_actions = confirmed = aborted = 0
+    program_started = program_completed = program_aborted = terminal_rule_actions = 0
     actions = []
+    events = []
     steps = 0
     unresolved = False
     success = False
@@ -284,13 +304,13 @@ def run_task(
         by_rule = False
         clear_resumptions = False
         if mode == "rules":
-            if any(not resumption_ok(item, registry, state) for item in resumptions):
+            if any(not resumption_ok(item, registry, state, provenance) for item in resumptions):
                 resumptions = []
                 force_model = True
             if budget_used >= rule_budget:
                 resumptions = []
             rejected: list[GroundAction] = []
-            if (not force_model) and budget_used < rule_budget:
+            if allow_precall and (not force_model) and budget_used < rule_budget:
                 before = set(rejected)
                 action, supports, rejected = resolve(
                     library,
@@ -301,6 +321,7 @@ def run_task(
                     rejected,
                     disabled,
                     unknown_as_true,
+                    provenance,
                 )
                 rejections += len(set(rejected) - before)
                 if action is not None:
@@ -308,10 +329,15 @@ def run_task(
                     precall += 1
             if action is None:
                 chosen = False
+                invalid_before = False
+                conflict_before = False
                 for _ in range(proposal_cap):
+                    reason = _request_reason(invalid_before, conflict_before)
                     proposal = policy.propose(state.goal_dict(), list(history), list(rejected), state)
                     requests += 1
                     if not _valid_action(proposal, registry):
+                        invalid_before = True
+                        events.append({"reason": reason, "valid_format": False, "submitted": False})
                         continue
                     before = set(rejected)
                     alternative, alternative_supports, rejected = resolve(
@@ -323,6 +349,7 @@ def run_task(
                         rejected,
                         disabled,
                         unknown_as_true,
+                        provenance,
                     )
                     rejections += len(set(rejected) - before)
                     if (
@@ -330,6 +357,7 @@ def run_task(
                         and budget_used < rule_budget
                         and alternative is not None
                     ):
+                        events.append({"reason": reason, "valid_format": True, "submitted": True})
                         action = alternative
                         supports = alternative_supports
                         by_rule = True
@@ -340,7 +368,10 @@ def run_task(
                         chosen = True
                         break
                     if proposal in set(rejected):
+                        conflict_before = True
+                        events.append({"reason": reason, "valid_format": True, "submitted": False})
                         continue
+                    events.append({"reason": reason, "valid_format": True, "submitted": True})
                     action = proposal
                     supports = []
                     by_rule = False
@@ -353,18 +384,26 @@ def run_task(
         else:
             rejected = []
             chosen = False
+            invalid_before = False
+            conflict_before = False
             for _ in range(proposal_cap):
+                reason = _request_reason(invalid_before, conflict_before)
                 proposal = policy.propose(state.goal_dict(), list(history), list(rejected), state)
                 requests += 1
                 if not _valid_action(proposal, registry):
+                    invalid_before = True
+                    events.append({"reason": reason, "valid_format": False, "submitted": False})
                     continue
                 if mode == "interface":
-                    reason = registry.interface_reject_reason(state, proposal)
-                    if reason is not None:
+                    reason_text = registry.interface_reject_reason(state, proposal)
+                    if reason_text is not None:
+                        conflict_before = True
                         if proposal not in rejected:
                             rejected.append(proposal)
                             rejections += 1
+                        events.append({"reason": reason, "valid_format": True, "submitted": False})
                         continue
+                events.append({"reason": reason, "valid_format": True, "submitted": True})
                 action = proposal
                 chosen = True
                 break
@@ -385,17 +424,25 @@ def run_task(
         if by_rule:
             budget_used += 1
             rule_actions += 1
+            program_started += sum(1 for record in supports if record.step_index == 0)
             verdict = _judge(supports, action, result.feedback, stepwise)
             if verdict is Tri.TRUE:
+                finished = sum(
+                    1 for record in supports if record.step_index + 1 >= len(record.rule.program)
+                )
                 resumptions = _advance(supports, registry)
                 confirmed += 1
+                program_completed += finished
             else:
                 resumptions = []
+                program_aborted += len(supports)
                 for record in supports:
                     fields = registry.watched_fields(record.rule, record.binding, state)
                     disabled.add((record.canon, freeze_binding(record.binding), fields))
                 force_model = True
                 aborted += 1
+            if result.done:
+                terminal_rule_actions += 1
         if result.done:
             break
 
@@ -422,4 +469,9 @@ def run_task(
         aborted,
         tuple(actions),
         tuple(history),
+        tuple(events),
+        program_started,
+        program_completed,
+        program_aborted,
+        terminal_rule_actions,
     )
