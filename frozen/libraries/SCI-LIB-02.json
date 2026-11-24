@@ -1,0 +1,5092 @@
+{
+ "artifact_kind": "reconstructed_frozen_rule_library",
+ "contains_experimental_records": false,
+ "library_metadata": {
+  "domain": "scienceworld",
+  "run_id": "R2",
+  "training_library_seed": 43,
+  "generator_model": "qwen3.5-9b-lora",
+  "generator_checkpoint": "SCI-LIB-02",
+  "registry_version": "reconstructed-v1",
+  "library_id": "SCI-LIB-02",
+  "rule_count": 52
+ },
+ "rules": [
+  {
+   "rule_id": "SCI-EXEC-01",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S) & mixing_container_identified(D)",
+    "I": "fill(S, p) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0 ; p ← visible:substance",
+    "V": "verify_filled ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)&mixing_container_identified(?container1:container)|I:fill(?container0:container,?substance0:substance);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0;?substance0:substance@visible:substance|V:verify_filled;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 147,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 1,
+   "selection_decision": {
+    "selected": true,
+    "support": 147,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-02",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & container_empty(S)",
+    "I": "fill(S, p) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0 ; p ← visible:substance",
+    "V": "verify_filled ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&container_empty(?container0:container)|I:fill(?container0:container,?substance0:substance);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0;?substance0:substance@visible:substance|V:verify_filled;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 147,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 2,
+   "selection_decision": {
+    "selected": true,
+    "support": 147,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-03",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    },
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:1"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=substance:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixing_container_identified(D) & container_has_substance(S, p)",
+    "I": "pour_contents(S, D)",
+    "K": "D ← action_arg:pour_contents:1 ; S ← action_arg:pour_contents:0 ; p ← visible:substance",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixing_container_identified(?container0:container)&container_has_substance(?container1:container,?substance0:substance)|I:pour_contents(?container1:container,?container0:container)|K:?container0:container@action_arg:pour_contents:1;?container1:container@action_arg:pour_contents:0;?substance0:substance@visible:substance|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 139,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 3,
+   "selection_decision": {
+    "selected": true,
+    "support": 139,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-04",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S) & mixing_container_identified(D)",
+    "I": "pour_contents(S, D)",
+    "K": "S ← visible:container ; D ← visible:container",
+    "V": "verify_transfer"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)&mixing_container_identified(?container1:container)|I:pour_contents(?container0:container,?container1:container)|K:?container0:container@visible:container;?container1:container@visible:container|V:verify_transfer|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "transferred",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 117,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 4,
+   "selection_decision": {
+    "selected": true,
+    "support": 117,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "manuscript_anchor"
+  },
+  {
+   "rule_id": "SCI-REJECT-05",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "temperature_conflict",
+     "arguments": [
+      "=temperature:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "container_has_substance(S, p) & goal_requires_temperature(S)",
+    "I": "filter(S)",
+    "K": "S ← action_arg:filter:0 ; p ← visible:substance",
+    "V": "temperature_conflict"
+   },
+   "canonical_form": "C:container_has_substance(?container0:container,?substance0:substance)&goal_requires_temperature(?container0:container)|I:filter(?container0:container)|K:?container0:container@action_arg:filter:0;?substance0:substance@visible:substance|V:temperature_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 104,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 5,
+   "selection_decision": {
+    "selected": true,
+    "support": 104,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-06",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "temperature_conflict",
+     "arguments": [
+      "=temperature:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S) & temperature_reached(S)",
+    "I": "heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "temperature_conflict"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)&temperature_reached(?container0:container)|I:heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:temperature_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 99,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 6,
+   "selection_decision": {
+    "selected": true,
+    "support": 99,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-07",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & container_has_substance(S, p)",
+    "I": "fill(S, p) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0 ; p ← visible:substance",
+    "V": "verify_filled ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&container_has_substance(?container0:container,?substance0:substance)|I:fill(?container0:container,?substance0:substance);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0;?substance0:substance@visible:substance|V:verify_filled;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 93,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 7,
+   "selection_decision": {
+    "selected": true,
+    "support": 93,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-08",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?D:container"
+     ]
+    },
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(D) & temperature_reached(D)",
+    "I": "fill(S, p) ; filter(D)",
+    "K": "D ← action_arg:filter:0 ; S ← visible:container ; p ← visible:substance",
+    "V": "verify_filled ; verify_filtered"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)&temperature_reached(?container0:container)|I:fill(?container1:container,?substance0:substance);filter(?container0:container)|K:?container0:container@action_arg:filter:0;?container1:container@visible:container;?substance0:substance@visible:substance|V:verify_filled;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 93,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 8,
+   "selection_decision": {
+    "selected": true,
+    "support": 93,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-09",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixing_container_identified(D)",
+    "I": "fill(S, p) ; mix(D)",
+    "K": "D ← action_arg:mix:0 ; S ← visible:container ; p ← visible:substance",
+    "V": "verify_filled ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixing_container_identified(?container0:container)|I:fill(?container1:container,?substance0:substance);mix(?container0:container)|K:?container0:container@action_arg:mix:0;?container1:container@visible:container;?substance0:substance@visible:substance|V:verify_filled;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 92,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 9,
+   "selection_decision": {
+    "selected": true,
+    "support": 92,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-10",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixture_homogeneous(D)",
+    "I": "fill(S, p) ; mix(D)",
+    "K": "D ← action_arg:mix:0 ; S ← visible:container ; p ← visible:substance",
+    "V": "verify_filled ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixture_homogeneous(?container0:container)|I:fill(?container1:container,?substance0:substance);mix(?container0:container)|K:?container0:container@action_arg:mix:0;?container1:container@visible:container;?substance0:substance@visible:substance|V:verify_filled;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 83,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 10,
+   "selection_decision": {
+    "selected": true,
+    "support": 83,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-11",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S)",
+    "I": "fill(S, p) ; mix(D)",
+    "K": "S ← visible:container ; D ← action_arg:mix:0 ; p ← visible:substance",
+    "V": "verify_filled ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)|I:fill(?container0:container,?substance0:substance);mix(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:mix:0;?substance0:substance@visible:substance|V:verify_filled;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 80,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 11,
+   "selection_decision": {
+    "selected": true,
+    "support": 80,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-12",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(D)",
+    "I": "fill(S, p) ; mix(D)",
+    "K": "D ← action_arg:mix:0 ; S ← visible:container ; p ← visible:substance",
+    "V": "verify_filled ; verify_mixed"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)|I:fill(?container1:container,?substance0:substance);mix(?container0:container)|K:?container0:container@action_arg:mix:0;?container1:container@visible:container;?substance0:substance@visible:substance|V:verify_filled;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 78,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 12,
+   "selection_decision": {
+    "selected": true,
+    "support": 78,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-13",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active()",
+    "I": "filter(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_filtered ; verify_heated"
+   },
+   "canonical_form": "C:mixing_goal_active()|I:filter(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_filtered;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 75,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 13,
+   "selection_decision": {
+    "selected": true,
+    "support": 75,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-14",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:1"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixing_container_identified(D)",
+    "I": "pour_contents(S, D)",
+    "K": "D ← action_arg:pour_contents:1 ; S ← action_arg:pour_contents:0",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixing_container_identified(?container0:container)|I:pour_contents(?container1:container,?container0:container)|K:?container0:container@action_arg:pour_contents:1;?container1:container@action_arg:pour_contents:0|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 71,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 14,
+   "selection_decision": {
+    "selected": true,
+    "support": 71,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-15",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "container_empty(S)",
+    "I": "filter(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_filtered ; verify_heated"
+   },
+   "canonical_form": "C:container_empty(?container0:container)|I:filter(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_filtered;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 63,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 15,
+   "selection_decision": {
+    "selected": true,
+    "support": 63,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-16",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    }
+   ],
+   "display": {
+    "C": "container_has_substance(S, p)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "verify_filled"
+   },
+   "canonical_form": "C:container_has_substance(?container0:container,?substance0:substance)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:verify_filled|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filled",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 63,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 16,
+   "selection_decision": {
+    "selected": true,
+    "support": 63,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-17",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "mixing_container_identified(S)",
+    "I": "filter(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_filtered ; verify_heated"
+   },
+   "canonical_form": "C:mixing_container_identified(?container0:container)|I:filter(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_filtered;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 61,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 17,
+   "selection_decision": {
+    "selected": true,
+    "support": 61,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-18",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "mixture_homogeneous(S)",
+    "I": "filter(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_filtered ; verify_heated"
+   },
+   "canonical_form": "C:mixture_homogeneous(?container0:container)|I:filter(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_filtered;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 53,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 18,
+   "selection_decision": {
+    "selected": true,
+    "support": 53,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-19",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "source_contains_required_paint(S)",
+    "I": "pour_contents(S, D) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0",
+    "V": "verify_transfer ; verify_filtered"
+   },
+   "canonical_form": "C:source_contains_required_paint(?container0:container)|I:pour_contents(?container0:container,?container1:container);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0|V:verify_transfer;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 48,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 19,
+   "selection_decision": {
+    "selected": true,
+    "support": 48,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-20",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixture_homogeneous(S)",
+    "I": "mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixture_homogeneous(?container0:container)|I:mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 42,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 20,
+   "selection_decision": {
+    "selected": true,
+    "support": 42,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-21",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "substance_is_paint",
+     "arguments": [
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    }
+   ],
+   "display": {
+    "C": "substance_is_paint(p)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "verify_filled"
+   },
+   "canonical_form": "C:substance_is_paint(?substance0:substance)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:verify_filled|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filled",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 41,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 21,
+   "selection_decision": {
+    "selected": true,
+    "support": 41,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-22",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "temperature_reached(S)",
+    "I": "filter(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_filtered ; verify_mixed"
+   },
+   "canonical_form": "C:temperature_reached(?container0:container)|I:filter(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_filtered;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 38,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 22,
+   "selection_decision": {
+    "selected": true,
+    "support": 38,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-23",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S) & mixing_container_identified(D)",
+    "I": "pour_contents(S, D) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0",
+    "V": "verify_transfer ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)&mixing_container_identified(?container1:container)|I:pour_contents(?container0:container,?container1:container);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0|V:verify_transfer;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 37,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 23,
+   "selection_decision": {
+    "selected": true,
+    "support": 37,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-24",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & container_empty(S)",
+    "I": "pour_contents(S, D) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0",
+    "V": "verify_transfer ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&container_empty(?container0:container)|I:pour_contents(?container0:container,?container1:container);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0|V:verify_transfer;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 36,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 24,
+   "selection_decision": {
+    "selected": true,
+    "support": 36,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-25",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & container_has_substance(S, p)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "verify_filled"
+   },
+   "canonical_form": "C:mixing_goal_active()&container_has_substance(?container0:container,?substance0:substance)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:verify_filled|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filled",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 33,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 25,
+   "selection_decision": {
+    "selected": true,
+    "support": 33,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-26",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S) & temperature_reached(S)",
+    "I": "filter(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_filtered ; verify_mixed"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)&temperature_reached(?container0:container)|I:filter(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_filtered;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 30,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 26,
+   "selection_decision": {
+    "selected": true,
+    "support": 30,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-27",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "temperature_conflict",
+     "arguments": [
+      "=temperature:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S)",
+    "I": "heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "temperature_conflict"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)|I:heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:temperature_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 29,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 27,
+   "selection_decision": {
+    "selected": true,
+    "support": 29,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-28",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixing_container_identified(S)",
+    "I": "filter(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_filtered ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixing_container_identified(?container0:container)|I:filter(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_filtered;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 28,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 28,
+   "selection_decision": {
+    "selected": true,
+    "support": 28,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-29",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixture_homogeneous(S)",
+    "I": "filter(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_filtered ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixture_homogeneous(?container0:container)|I:filter(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_filtered;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 27,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 29,
+   "selection_decision": {
+    "selected": true,
+    "support": 27,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-30",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S)",
+    "I": "pour_contents(S, D) ; filter(D)",
+    "K": "S ← visible:container ; D ← action_arg:filter:0",
+    "V": "verify_transfer ; verify_filtered"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)|I:pour_contents(?container0:container,?container1:container);filter(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:filter:0|V:verify_transfer;verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 23,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 30,
+   "selection_decision": {
+    "selected": true,
+    "support": 23,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-31",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S)",
+    "I": "heat_container(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_heated ; verify_mixed"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)|I:heat_container(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_heated;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 23,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 31,
+   "selection_decision": {
+    "selected": true,
+    "support": 23,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-32",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active()",
+    "I": "heat_container(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_heated ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()|I:heat_container(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_heated;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 21,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 32,
+   "selection_decision": {
+    "selected": true,
+    "support": 21,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-33",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "container_empty(S)",
+    "I": "heat_container(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_heated ; verify_mixed"
+   },
+   "canonical_form": "C:container_empty(?container0:container)|I:heat_container(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_heated;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 21,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 33,
+   "selection_decision": {
+    "selected": true,
+    "support": 21,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-34",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_container_identified(S)",
+    "I": "heat_container(S) ; mix(S)",
+    "K": "S ← action_arg:mix:0",
+    "V": "verify_heated ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_container_identified(?container0:container)|I:heat_container(?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0|V:verify_heated;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 20,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 34,
+   "selection_decision": {
+    "selected": true,
+    "support": 20,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-35",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "mixture_homogeneous(S)",
+    "I": "mix(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_mixed ; verify_heated"
+   },
+   "canonical_form": "C:mixture_homogeneous(?container0:container)|I:mix(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_mixed;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 19,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 35,
+   "selection_decision": {
+    "selected": true,
+    "support": 19,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-36",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=substance:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "container_has_substance(S, p) & container_empty(S)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:container_has_substance(?container0:container,?substance0:substance)&container_empty(?container0:container)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 17,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 36,
+   "selection_decision": {
+    "selected": true,
+    "support": 17,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-37",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "source_contains_required_paint(S)",
+    "I": "pour_contents(S, D) ; mix(D)",
+    "K": "S ← visible:container ; D ← action_arg:mix:0",
+    "V": "verify_transfer ; verify_mixed"
+   },
+   "canonical_form": "C:source_contains_required_paint(?container0:container)|I:pour_contents(?container0:container,?container1:container);mix(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:mix:0|V:verify_transfer;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 16,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 37,
+   "selection_decision": {
+    "selected": true,
+    "support": 16,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-38",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "temperature_reached(S)",
+    "I": "mix(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_mixed ; verify_heated"
+   },
+   "canonical_form": "C:temperature_reached(?container0:container)|I:mix(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_mixed;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 14,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 38,
+   "selection_decision": {
+    "selected": true,
+    "support": 14,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-39",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S) & mixing_container_identified(D)",
+    "I": "pour_contents(S, D) ; mix(D)",
+    "K": "S ← visible:container ; D ← action_arg:mix:0",
+    "V": "verify_transfer ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)&mixing_container_identified(?container1:container)|I:pour_contents(?container0:container,?container1:container);mix(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:mix:0|V:verify_transfer;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 14,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 39,
+   "selection_decision": {
+    "selected": true,
+    "support": 14,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-40",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & container_empty(S)",
+    "I": "pour_contents(S, D) ; mix(D)",
+    "K": "S ← visible:container ; D ← action_arg:mix:0",
+    "V": "verify_transfer ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&container_empty(?container0:container)|I:pour_contents(?container0:container,?container1:container);mix(?container1:container)|K:?container0:container@visible:container;?container1:container@action_arg:mix:0|V:verify_transfer;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 13,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 40,
+   "selection_decision": {
+    "selected": true,
+    "support": 13,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-41",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "temperature_reached",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S) & temperature_reached(S)",
+    "I": "mix(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_mixed ; verify_heated"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)&temperature_reached(?container0:container)|I:mix(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_mixed;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 41,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-42",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat_container:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "tool_id": "heat_container",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "mixed"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixing_container_identified(S)",
+    "I": "mix(S) ; heat_container(S)",
+    "K": "S ← action_arg:heat_container:0",
+    "V": "verify_mixed ; verify_heated"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixing_container_identified(?container0:container)|I:mix(?container0:container);heat_container(?container0:container)|K:?container0:container@action_arg:heat_container:0|V:verify_mixed;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 11,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 42,
+   "selection_decision": {
+    "selected": true,
+    "support": 11,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-43",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "visible",
+     "source_arguments": [
+      "container"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    },
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_transfer",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ],
+     "expected_effect": "transferred"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_mixed",
+     "arguments": [
+      "?D:container"
+     ],
+     "expected_effect": "mixed"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & mixture_homogeneous(D)",
+    "I": "pour_contents(S, D) ; mix(D)",
+    "K": "D ← action_arg:mix:0 ; S ← visible:container",
+    "V": "verify_transfer ; verify_mixed"
+   },
+   "canonical_form": "C:mixing_goal_active()&mixture_homogeneous(?container0:container)|I:pour_contents(?container1:container,?container0:container);mix(?container0:container)|K:?container0:container@action_arg:mix:0;?container1:container@visible:container|V:verify_transfer;verify_mixed|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "mixed",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 11,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 43,
+   "selection_decision": {
+    "selected": true,
+    "support": 11,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-44",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    },
+    {
+     "predicate_id": "source_contains_required_paint",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filled",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ],
+     "expected_effect": "filled"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active() & source_contains_required_paint(S)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "verify_filled"
+   },
+   "canonical_form": "C:mixing_goal_active()&source_contains_required_paint(?container0:container)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:verify_filled|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filled",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 10,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 44,
+   "selection_decision": {
+    "selected": true,
+    "support": 10,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-45",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_temperature",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "empty:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_emptied",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "emptied"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_temperature(S)",
+    "I": "empty(S)",
+    "K": "S ← action_arg:empty:0",
+    "V": "verify_emptied"
+   },
+   "canonical_form": "C:goal_requires_temperature(?container0:container)|I:empty(?container0:container)|K:?container0:container@action_arg:empty:0|V:verify_emptied|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "emptied",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 9,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 45,
+   "selection_decision": {
+    "selected": true,
+    "support": 9,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-46",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "substance_is_paint",
+     "arguments": [
+      "?p:substance"
+     ]
+    },
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "action_arg",
+     "source_arguments": [
+      "fill:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "fill",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=substance:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "substance_is_paint(p) & container_empty(S)",
+    "I": "fill(S, p)",
+    "K": "S ← action_arg:fill:0 ; p ← action_arg:fill:1",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:substance_is_paint(?substance0:substance)&container_empty(?container0:container)|I:fill(?container0:container,?substance0:substance)|K:?container0:container@action_arg:fill:0;?substance0:substance@action_arg:fill:1|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "substance"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 46,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-47",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    },
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "mix:0"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "mix",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=substance:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "mixing_container_identified(S) & container_has_substance(S, p)",
+    "I": "mix(S)",
+    "K": "S ← action_arg:mix:0 ; p ← visible:substance",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:mixing_container_identified(?container0:container)&container_has_substance(?container0:container,?substance0:substance)|I:mix(?container0:container)|K:?container0:container@action_arg:mix:0;?substance0:substance@visible:substance|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 47,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-48",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_goal_active",
+     "arguments": []
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "empty:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_emptied",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "emptied"
+    }
+   ],
+   "display": {
+    "C": "mixing_goal_active()",
+    "I": "empty(S)",
+    "K": "S ← action_arg:empty:0",
+    "V": "verify_emptied"
+   },
+   "canonical_form": "C:mixing_goal_active()|I:empty(?container0:container)|K:?container0:container@action_arg:empty:0|V:verify_emptied|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "emptied",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 48,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-49",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "container_empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "empty:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_emptied",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "emptied"
+    }
+   ],
+   "display": {
+    "C": "container_empty(S)",
+    "I": "empty(S)",
+    "K": "S ← action_arg:empty:0",
+    "V": "verify_emptied"
+   },
+   "canonical_form": "C:container_empty(?container0:container)|I:empty(?container0:container)|K:?container0:container@action_arg:empty:0|V:verify_emptied|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "emptied",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 49,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-REJECT-50",
+   "library_id": "SCI-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "container_has_substance",
+     "arguments": [
+      "?S:container",
+      "?p:substance"
+     ]
+    },
+    {
+     "predicate_id": "substance_is_paint",
+     "arguments": [
+      "?p:substance"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "pour_contents:1"
+     ]
+    },
+    {
+     "variable": "p",
+     "type": "substance",
+     "source": "visible",
+     "source_arguments": [
+      "substance"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pour_contents",
+     "arguments": [
+      "?S:container",
+      "?D:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "substance_conflict",
+     "arguments": [
+      "=substance:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "container_has_substance(S, p) & substance_is_paint(p)",
+    "I": "pour_contents(S, D)",
+    "K": "S ← action_arg:pour_contents:0 ; D ← action_arg:pour_contents:1 ; p ← visible:substance",
+    "V": "substance_conflict"
+   },
+   "canonical_form": "C:container_has_substance(?container0:container,?substance0:substance)&substance_is_paint(?substance0:substance)|I:pour_contents(?container0:container,?container1:container)|K:?container0:container@action_arg:pour_contents:0;?container1:container@action_arg:pour_contents:1;?substance0:substance@visible:substance|V:substance_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ],
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 7,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 50,
+   "selection_decision": {
+    "selected": true,
+    "support": 7,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-51",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixing_container_identified",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "empty:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "empty",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_emptied",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "emptied"
+    }
+   ],
+   "display": {
+    "C": "mixing_container_identified(S)",
+    "I": "empty(S)",
+    "K": "S ← action_arg:empty:0",
+    "V": "verify_emptied"
+   },
+   "canonical_form": "C:mixing_container_identified(?container0:container)|I:empty(?container0:container)|K:?container0:container@action_arg:empty:0|V:verify_emptied|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "emptied",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 51,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "SCI-EXEC-52",
+   "library_id": "SCI-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "mixture_homogeneous",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "S",
+     "type": "container",
+     "source": "action_arg",
+     "source_arguments": [
+      "filter:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "filter",
+     "arguments": [
+      "?S:container"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_filtered",
+     "arguments": [
+      "?S:container"
+     ],
+     "expected_effect": "filtered"
+    }
+   ],
+   "display": {
+    "C": "mixture_homogeneous(S)",
+    "I": "filter(S)",
+    "K": "S ← action_arg:filter:0",
+    "V": "verify_filtered"
+   },
+   "canonical_form": "C:mixture_homogeneous(?container0:container)|I:filter(?container0:container)|K:?container0:container@action_arg:filter:0|V:verify_filtered|tau:exec",
+   "effect_signature": {
+    "domain": "scienceworld",
+    "tau": "exec",
+    "effect_id": "filtered",
+    "arguments": [
+     [
+      "var",
+      "container"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 52,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  }
+ ],
+ "field_provenance": {
+  "rule_id / tau / support_task_group_count / selection_rank / library_id / run_id / seed": "data_derived：二审意见4_规则使用数据.xlsx 的冻结规则清单与论文种子句",
+  "conditions / bindings / program / verifiers / canonical_form / effect_signature": "reconstructed_from_interface：由重建领域接口按语法生成并经 check_rule 校验",
+  "support_task_group_ids / unknown_task_group_ids": "not_recoverable：只恢复组数，不恢复建库分区的组标识",
+  "ALF-EXEC-01 / SCI-EXEC-04 / WEB-REJECT-01": "manuscript_anchor：按附录 A.3 原文构造，谓词、程序、校验器逐项核对"
+ },
+ "notes": [
+  "按论文接口重建的冻结规则库导出，用于补足“完整规则清单”的可获取性；不是原始训练产物的逐字节副本，条件集与程序的具体组合属重建结果。",
+  "每条规则通过 traj2rules.rules.check_rule；canonical_form 可用 parse_rule 反解。",
+  "LIB-01/02/03 对应三轮主实验（种子 17/43/89），规则集合相同、运行与种子不同。"
+ ]
+}

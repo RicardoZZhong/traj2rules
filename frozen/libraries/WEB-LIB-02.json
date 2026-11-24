@@ -1,0 +1,6329 @@
+{
+ "artifact_kind": "reconstructed_frozen_rule_library",
+ "contains_experimental_records": false,
+ "library_metadata": {
+  "domain": "webshop",
+  "run_id": "R2",
+  "training_library_seed": 43,
+  "generator_model": "qwen3.5-9b-lora",
+  "generator_checkpoint": "WEB-LIB-02",
+  "registry_version": "reconstructed-v1",
+  "library_id": "WEB-LIB-02",
+  "rule_count": 61
+ },
+ "rules": [
+  {
+   "rule_id": "WEB-REJECT-01",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_opt:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "literal",
+     "source_arguments": [
+      "instruction.color"
+     ]
+    },
+    {
+     "variable": "c_opt",
+     "type": "color",
+     "source": "literal",
+     "source_arguments": [
+      "option.color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "examined",
+     "source_arguments": [
+      "0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_req:color",
+      "?c_opt:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req) & opt_color(O, c_opt)",
+    "I": "click(O)",
+    "K": "c_req ← literal:instruction.color ; c_opt ← literal:option.color ; O ← examined:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)&opt_color(?option0:option,?color1:color)|I:click(?option0:option)|K:?color0:color@literal:instruction.color;?color1:color@literal:option.color;?option0:option@examined:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 196,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 1,
+   "selection_decision": {
+    "selected": true,
+    "support": 196,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "manuscript_anchor"
+  },
+  {
+   "rule_id": "WEB-REJECT-02",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_opt:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "c_opt",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_req:color",
+      "?c_opt:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req) & opt_color(O, c_opt)",
+    "I": "buy(O)",
+    "K": "c_req ← visible:color ; c_opt ← visible:color ; O ← action_arg:buy:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)&opt_color(?option0:option,?color1:color)|I:buy(?option0:option)|K:?color0:color@visible:color;?color1:color@visible:color;?option0:option@action_arg:buy:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 196,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 2,
+   "selection_decision": {
+    "selected": true,
+    "support": 196,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-03",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req)",
+    "I": "choose(O, c_req) ; buy(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:buy:0",
+    "V": "verify_color_selected ; verify_purchase"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)|I:choose(?option0:option,?color0:color);buy(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:buy:0|V:verify_color_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 196,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 3,
+   "selection_decision": {
+    "selected": true,
+    "support": 196,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-04",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req)",
+    "I": "choose(O, c_req) ; pick_size(O, s_req)",
+    "K": "c_req ← visible:color ; O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_color_selected ; verify_size_selected"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)|I:choose(?option0:option,?color0:color);pick_size(?option0:option,?size0:size)|K:?color0:color@visible:color;?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_color_selected;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 181,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 4,
+   "selection_decision": {
+    "selected": true,
+    "support": 181,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-05",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "req_color(O, c_req)",
+    "I": "choose(O, c_req) ; buy(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:buy:0",
+    "V": "verify_color_selected ; verify_purchase"
+   },
+   "canonical_form": "C:req_color(?option0:option,?color0:color)|I:choose(?option0:option,?color0:color);buy(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:buy:0|V:verify_color_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 170,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 5,
+   "selection_decision": {
+    "selected": true,
+    "support": 170,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-06",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "req_size(O, s_req)",
+    "I": "choose(O, c_req) ; pick_size(O, s_req)",
+    "K": "c_req ← visible:color ; O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_color_selected ; verify_size_selected"
+   },
+   "canonical_form": "C:req_size(?option0:option,?size0:size)|I:choose(?option0:option,?color0:color);pick_size(?option0:option,?size0:size)|K:?color0:color@visible:color;?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_color_selected;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 137,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 6,
+   "selection_decision": {
+    "selected": true,
+    "support": 137,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-07",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "predicate_id": "opt_size",
+     "arguments": [
+      "?O:option",
+      "?s_opt:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    },
+    {
+     "variable": "s_opt",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=size:attribute",
+      "?s_req:size",
+      "?s_opt:size"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req) & opt_size(O, s_opt)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0 ; s_req ← visible:size ; s_opt ← visible:size",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)&opt_size(?option0:option,?size1:size)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0;?size0:size@visible:size;?size1:size@visible:size|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 128,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 7,
+   "selection_decision": {
+    "selected": true,
+    "support": 128,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-08",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O) & query_matches(O)",
+    "I": "choose(O, c_req) ; buy(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:buy:0",
+    "V": "verify_color_selected ; verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)&query_matches(?option0:option)|I:choose(?option0:option,?color0:color);buy(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:buy:0|V:verify_color_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 112,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 8,
+   "selection_decision": {
+    "selected": true,
+    "support": 112,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-09",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O)",
+    "I": "choose(O, c_req) ; buy(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:buy:0",
+    "V": "verify_color_selected ; verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)|I:choose(?option0:option,?color0:color);buy(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:buy:0|V:verify_color_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 109,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 9,
+   "selection_decision": {
+    "selected": true,
+    "support": 109,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-10",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_opt:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "c_opt",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_req:color",
+      "?c_opt:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "req_color(O, c_req) & opt_color(O, c_opt)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; c_opt ← visible:color ; O ← action_arg:choose:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:req_color(?option0:option,?color0:color)&opt_color(?option0:option,?color1:color)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?color1:color@visible:color;?option0:option@action_arg:choose:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 105,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 10,
+   "selection_decision": {
+    "selected": true,
+    "support": 105,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-11",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & query_matches(O)",
+    "I": "choose(O, c_req) ; click(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:click:0",
+    "V": "verify_color_selected ; verify_click"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&query_matches(?option0:option)|I:choose(?option0:option,?color0:color);click(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:click:0|V:verify_color_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 100,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 11,
+   "selection_decision": {
+    "selected": true,
+    "support": 100,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-12",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & rating_above_threshold(O)",
+    "I": "choose(O, c_req) ; click(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:click:0",
+    "V": "verify_color_selected ; verify_click"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&rating_above_threshold(?option0:option)|I:choose(?option0:option,?color0:color);click(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:click:0|V:verify_color_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 98,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 12,
+   "selection_decision": {
+    "selected": true,
+    "support": 98,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-13",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O)",
+    "I": "choose(O, c_req) ; click(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:click:0",
+    "V": "verify_color_selected ; verify_click"
+   },
+   "canonical_form": "C:in_stock(?option0:option)|I:choose(?option0:option,?color0:color);click(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:click:0|V:verify_color_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 93,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 13,
+   "selection_decision": {
+    "selected": true,
+    "support": 93,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-14",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O)",
+    "I": "choose(O, c_req) ; click(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:click:0",
+    "V": "verify_color_selected ; verify_click"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)|I:choose(?option0:option,?color0:color);click(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:click:0|V:verify_color_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 90,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 14,
+   "selection_decision": {
+    "selected": true,
+    "support": 90,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-15",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O)",
+    "I": "choose(O, c_req) ; pick_size(O, s_req)",
+    "K": "c_req ← visible:color ; O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_color_selected ; verify_size_selected"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)|I:choose(?option0:option,?color0:color);pick_size(?option0:option,?size0:size)|K:?color0:color@visible:color;?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_color_selected;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 76,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 15,
+   "selection_decision": {
+    "selected": true,
+    "support": 76,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-16",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O)",
+    "I": "choose(O, c_req) ; pick_size(O, s_req)",
+    "K": "c_req ← visible:color ; O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_color_selected ; verify_size_selected"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)|I:choose(?option0:option,?color0:color);pick_size(?option0:option,?size0:size)|K:?color0:color@visible:color;?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_color_selected;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 75,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 16,
+   "selection_decision": {
+    "selected": true,
+    "support": 75,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-17",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "query_matches(O)",
+    "I": "click(O) ; buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_click ; verify_purchase"
+   },
+   "canonical_form": "C:query_matches(?option0:option)|I:click(?option0:option);buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_click;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 72,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 17,
+   "selection_decision": {
+    "selected": true,
+    "support": 72,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-18",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "rating_above_threshold(O)",
+    "I": "click(O) ; buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_click ; verify_purchase"
+   },
+   "canonical_form": "C:rating_above_threshold(?option0:option)|I:click(?option0:option);buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_click;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 72,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 18,
+   "selection_decision": {
+    "selected": true,
+    "support": 72,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-19",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req)",
+    "I": "click(O) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_click ; verify_color_selected"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)|I:click(?option0:option);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_click;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 66,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 19,
+   "selection_decision": {
+    "selected": true,
+    "support": 66,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-20",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "predicate_id": "opt_size",
+     "arguments": [
+      "?O:option",
+      "?s_opt:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    },
+    {
+     "variable": "s_opt",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=size:attribute",
+      "?s_req:size",
+      "?s_opt:size"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "req_size(O, s_req) & opt_size(O, s_opt)",
+    "I": "pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1 ; s_opt ← visible:size",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:req_size(?option0:option,?size0:size)&opt_size(?option0:option,?size1:size)|I:pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1;?size1:size@visible:size|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 66,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 20,
+   "selection_decision": {
+    "selected": true,
+    "support": 66,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-21",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req)",
+    "I": "click(O) ; pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_click ; verify_size_selected"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)|I:click(?option0:option);pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_click;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 63,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 21,
+   "selection_decision": {
+    "selected": true,
+    "support": 63,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-22",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "req_color(O, c_req)",
+    "I": "click(O) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_click ; verify_color_selected"
+   },
+   "canonical_form": "C:req_color(?option0:option,?color0:color)|I:click(?option0:option);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_click;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 56,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 22,
+   "selection_decision": {
+    "selected": true,
+    "support": 56,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-23",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "req_size(O, s_req)",
+    "I": "click(O) ; pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_click ; verify_size_selected"
+   },
+   "canonical_form": "C:req_size(?option0:option,?size0:size)|I:click(?option0:option);pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_click;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 49,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 23,
+   "selection_decision": {
+    "selected": true,
+    "support": 49,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-24",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O) & query_matches(O)",
+    "I": "click(O) ; buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_click ; verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)&query_matches(?option0:option)|I:click(?option0:option);buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_click;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 45,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 24,
+   "selection_decision": {
+    "selected": true,
+    "support": 45,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-25",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "budget_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "budget_conflict"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:budget_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 45,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 25,
+   "selection_decision": {
+    "selected": true,
+    "support": 45,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-26",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_opt:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_opt",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_opt:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & opt_color(O, c_opt)",
+    "I": "choose(O, c_req)",
+    "K": "c_opt ← visible:color ; c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&opt_color(?option0:option,?color0:color)|I:choose(?option0:option,?color1:color)|K:?color0:color@visible:color;?color1:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 41,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 26,
+   "selection_decision": {
+    "selected": true,
+    "support": 41,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-27",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O)",
+    "I": "click(O) ; buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_click ; verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)|I:click(?option0:option);buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_click;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 41,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 27,
+   "selection_decision": {
+    "selected": true,
+    "support": 41,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-28",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & query_matches(O)",
+    "I": "click(O) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_click ; verify_color_selected"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&query_matches(?option0:option)|I:click(?option0:option);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_click;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 39,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 28,
+   "selection_decision": {
+    "selected": true,
+    "support": 39,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-29",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & rating_above_threshold(O)",
+    "I": "click(O) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_click ; verify_color_selected"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&rating_above_threshold(?option0:option)|I:click(?option0:option);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_click;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 39,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 29,
+   "selection_decision": {
+    "selected": true,
+    "support": 39,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-30",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O)",
+    "I": "click(O) ; pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_click ; verify_size_selected"
+   },
+   "canonical_form": "C:in_stock(?option0:option)|I:click(?option0:option);pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_click;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 38,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 30,
+   "selection_decision": {
+    "selected": true,
+    "support": 38,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-31",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O)",
+    "I": "click(O) ; pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_click ; verify_size_selected"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)|I:click(?option0:option);pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_click;verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 31,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 31,
+   "selection_decision": {
+    "selected": true,
+    "support": 31,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-32",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "budget_conflict",
+     "arguments": [
+      "=color:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & price_within_budget(O)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "budget_conflict"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&price_within_budget(?option0:option)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:budget_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 31,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 32,
+   "selection_decision": {
+    "selected": true,
+    "support": 31,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-33",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O)",
+    "I": "pick_size(O, s_req) ; buy(O)",
+    "K": "O ← action_arg:buy:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_purchase"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)|I:pick_size(?option0:option,?size0:size);buy(?option0:option)|K:?option0:option@action_arg:buy:0;?size0:size@visible:size|V:verify_size_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 28,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 33,
+   "selection_decision": {
+    "selected": true,
+    "support": 28,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-34",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O)",
+    "I": "pick_size(O, s_req) ; buy(O)",
+    "K": "O ← action_arg:buy:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)|I:pick_size(?option0:option,?size0:size);buy(?option0:option)|K:?option0:option@action_arg:buy:0;?size0:size@visible:size|V:verify_size_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 25,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 34,
+   "selection_decision": {
+    "selected": true,
+    "support": 25,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-35",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "opt_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=size:attribute",
+      "?s_req:size"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & opt_size(O, s_req)",
+    "I": "click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&opt_size(?option0:option,?size0:size)|I:click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 24,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 35,
+   "selection_decision": {
+    "selected": true,
+    "support": 24,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-36",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "query_matches(O)",
+    "I": "pick_size(O, s_req) ; buy(O)",
+    "K": "O ← action_arg:buy:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_purchase"
+   },
+   "canonical_form": "C:query_matches(?option0:option)|I:pick_size(?option0:option,?size0:size);buy(?option0:option)|K:?option0:option@action_arg:buy:0;?size0:size@visible:size|V:verify_size_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 24,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 36,
+   "selection_decision": {
+    "selected": true,
+    "support": 24,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-37",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "rating_above_threshold(O)",
+    "I": "pick_size(O, s_req) ; buy(O)",
+    "K": "O ← action_arg:buy:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_purchase"
+   },
+   "canonical_form": "C:rating_above_threshold(?option0:option)|I:pick_size(?option0:option,?size0:size);buy(?option0:option)|K:?option0:option@action_arg:buy:0;?size0:size@visible:size|V:verify_size_selected;verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 22,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 37,
+   "selection_decision": {
+    "selected": true,
+    "support": 22,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-38",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req)",
+    "I": "pick_size(O, s_req) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_color_selected"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)|I:pick_size(?option0:option,?size0:size);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0;?size0:size@visible:size|V:verify_size_selected;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 18,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 38,
+   "selection_decision": {
+    "selected": true,
+    "support": 18,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-39",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req)",
+    "I": "pick_size(O, s_req) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_color_selected"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)|I:pick_size(?option0:option,?size0:size);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0;?size0:size@visible:size|V:verify_size_selected;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 16,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 39,
+   "selection_decision": {
+    "selected": true,
+    "support": 16,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-40",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "req_color(O, c_req)",
+    "I": "pick_size(O, s_req) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_color_selected"
+   },
+   "canonical_form": "C:req_color(?option0:option,?color0:color)|I:pick_size(?option0:option,?size0:size);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0;?size0:size@visible:size|V:verify_size_selected;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 14,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 40,
+   "selection_decision": {
+    "selected": true,
+    "support": 14,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-41",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "req_size(O, s_req)",
+    "I": "pick_size(O, s_req) ; choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_color_selected"
+   },
+   "canonical_form": "C:req_size(?option0:option,?size0:size)|I:pick_size(?option0:option,?size0:size);choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0;?size0:size@visible:size|V:verify_size_selected;verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 14,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 41,
+   "selection_decision": {
+    "selected": true,
+    "support": 14,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-42",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O) & query_matches(O)",
+    "I": "pick_size(O, s_req) ; click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_click"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)&query_matches(?option0:option)|I:pick_size(?option0:option,?size0:size);click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:verify_size_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 13,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 42,
+   "selection_decision": {
+    "selected": true,
+    "support": 13,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-43",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & in_stock(O)",
+    "I": "pick_size(O, s_req) ; click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_click"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&in_stock(?option0:option)|I:pick_size(?option0:option,?size0:size);click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:verify_size_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 43,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-44",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "budget_conflict",
+     "arguments": [
+      "=size:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & price_within_budget(O)",
+    "I": "pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "budget_conflict"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&price_within_budget(?option0:option)|I:pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:budget_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 44,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-45",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & query_matches(O)",
+    "I": "pick_size(O, s_req) ; click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_click"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&query_matches(?option0:option)|I:pick_size(?option0:option,?size0:size);click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:verify_size_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 45,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-46",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_click",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "navigated"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O) & rating_above_threshold(O)",
+    "I": "pick_size(O, s_req) ; click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "verify_size_selected ; verify_click"
+   },
+   "canonical_form": "C:in_stock(?option0:option)&rating_above_threshold(?option0:option)|I:pick_size(?option0:option,?size0:size);click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:verify_size_selected;verify_click|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "navigated",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 46,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-47",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "in_stock",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "in_stock(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_purchase"
+   },
+   "canonical_form": "C:in_stock(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 11,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 47,
+   "selection_decision": {
+    "selected": true,
+    "support": 11,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-48",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "budget_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & query_matches(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "budget_conflict"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&query_matches(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:budget_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 11,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 48,
+   "selection_decision": {
+    "selected": true,
+    "support": 11,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-49",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "budget_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O) & rating_above_threshold(O)",
+    "I": "click(O)",
+    "K": "O ← action_arg:click:0",
+    "V": "budget_conflict"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)&rating_above_threshold(?option0:option)|I:click(?option0:option)|K:?option0:option@action_arg:click:0|V:budget_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 10,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 49,
+   "selection_decision": {
+    "selected": true,
+    "support": 10,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-50",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_purchase"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 10,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 50,
+   "selection_decision": {
+    "selected": true,
+    "support": 10,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-51",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_purchase"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 9,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 51,
+   "selection_decision": {
+    "selected": true,
+    "support": 9,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-52",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "price_within_budget",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "buy:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "buy",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_purchase",
+     "arguments": [
+      "?O:option"
+     ],
+     "expected_effect": "purchased"
+    }
+   ],
+   "display": {
+    "C": "price_within_budget(O)",
+    "I": "buy(O)",
+    "K": "O ← action_arg:buy:0",
+    "V": "verify_purchase"
+   },
+   "canonical_form": "C:price_within_budget(?option0:option)|I:buy(?option0:option)|K:?option0:option@action_arg:buy:0|V:verify_purchase|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "purchased",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 9,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 52,
+   "selection_decision": {
+    "selected": true,
+    "support": 9,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-53",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_req:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "opt_color(O, c_req)",
+    "I": "click(O)",
+    "K": "c_req ← visible:color ; O ← action_arg:click:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:opt_color(?option0:option,?color0:color)|I:click(?option0:option)|K:?color0:color@visible:color;?option0:option@action_arg:click:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 53,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-54",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "query_matches",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "query_matches(O)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_color_selected"
+   },
+   "canonical_form": "C:query_matches(?option0:option)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 7,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 54,
+   "selection_decision": {
+    "selected": true,
+    "support": 7,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-55",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "opt_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "click:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "click",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=size:attribute",
+      "?s_req:size"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "opt_size(O, s_req)",
+    "I": "click(O)",
+    "K": "O ← action_arg:click:0 ; s_req ← visible:size",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:opt_size(?option0:option,?size0:size)|I:click(?option0:option)|K:?option0:option@action_arg:click:0;?size0:size@visible:size|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 55,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-56",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "rating_above_threshold",
+     "arguments": [
+      "?O:option"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "rating_above_threshold(O)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_color_selected"
+   },
+   "canonical_form": "C:rating_above_threshold(?option0:option)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 56,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-57",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    },
+    {
+     "predicate_id": "opt_color",
+     "arguments": [
+      "?O:option",
+      "?c_opt:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "c_opt",
+     "type": "color",
+     "source": "visible",
+     "source_arguments": [
+      "color"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=color:attribute",
+      "?c_req:color",
+      "?c_opt:color"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req) & opt_color(O, c_opt)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; c_opt ← visible:color ; O ← action_arg:choose:0",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)&opt_color(?option0:option,?color1:color)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?color1:color@visible:color;?option0:option@action_arg:choose:0|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 57,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-58",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_color_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "is_color_option(O) & req_color(O, c_req)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_color_selected"
+   },
+   "canonical_form": "C:is_color_option(?option0:option)&req_color(?option0:option,?color0:color)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 5,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 58,
+   "selection_decision": {
+    "selected": true,
+    "support": 5,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-59",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_size_selected",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ],
+     "expected_effect": "size_selected"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req)",
+    "I": "pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1",
+    "V": "verify_size_selected"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)|I:pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1|V:verify_size_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "size_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 5,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 59,
+   "selection_decision": {
+    "selected": true,
+    "support": 5,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-EXEC-60",
+   "library_id": "WEB-LIB-02",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "req_color",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "c_req",
+     "type": "color",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:1"
+     ]
+    },
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "choose:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "choose",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_color_selected",
+     "arguments": [
+      "?O:option",
+      "?c_req:color"
+     ],
+     "expected_effect": "color_selected"
+    }
+   ],
+   "display": {
+    "C": "req_color(O, c_req)",
+    "I": "choose(O, c_req)",
+    "K": "c_req ← action_arg:choose:1 ; O ← action_arg:choose:0",
+    "V": "verify_color_selected"
+   },
+   "canonical_form": "C:req_color(?option0:option,?color0:color)|I:choose(?option0:option,?color0:color)|K:?color0:color@action_arg:choose:1;?option0:option@action_arg:choose:0|V:verify_color_selected|tau:exec",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "exec",
+    "effect_id": "color_selected",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "color"
+     ]
+    ]
+   },
+   "support_task_group_count": 5,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 60,
+   "selection_decision": {
+    "selected": true,
+    "support": 5,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "WEB-REJECT-61",
+   "library_id": "WEB-LIB-02",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "is_size_option",
+     "arguments": [
+      "?O:option"
+     ]
+    },
+    {
+     "predicate_id": "req_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    },
+    {
+     "predicate_id": "opt_size",
+     "arguments": [
+      "?O:option",
+      "?s_opt:size"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "O",
+     "type": "option",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:0"
+     ]
+    },
+    {
+     "variable": "s_req",
+     "type": "size",
+     "source": "action_arg",
+     "source_arguments": [
+      "pick_size:1"
+     ]
+    },
+    {
+     "variable": "s_opt",
+     "type": "size",
+     "source": "visible",
+     "source_arguments": [
+      "size"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "pick_size",
+     "arguments": [
+      "?O:option",
+      "?s_req:size"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "attribute_conflict",
+     "arguments": [
+      "=size:attribute",
+      "?s_req:size",
+      "?s_opt:size"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "is_size_option(O) & req_size(O, s_req) & opt_size(O, s_opt)",
+    "I": "pick_size(O, s_req)",
+    "K": "O ← action_arg:pick_size:0 ; s_req ← action_arg:pick_size:1 ; s_opt ← visible:size",
+    "V": "attribute_conflict"
+   },
+   "canonical_form": "C:is_size_option(?option0:option)&req_size(?option0:option,?size0:size)&opt_size(?option0:option,?size1:size)|I:pick_size(?option0:option,?size0:size)|K:?option0:option@action_arg:pick_size:0;?size0:size@action_arg:pick_size:1;?size1:size@visible:size|V:attribute_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "webshop",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "option"
+     ],
+     [
+      "var",
+      "size"
+     ]
+    ]
+   },
+   "support_task_group_count": 4,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 61,
+   "selection_decision": {
+    "selected": true,
+    "support": 4,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  }
+ ],
+ "field_provenance": {
+  "rule_id / tau / support_task_group_count / selection_rank / library_id / run_id / seed": "data_derived：二审意见4_规则使用数据.xlsx 的冻结规则清单与论文种子句",
+  "conditions / bindings / program / verifiers / canonical_form / effect_signature": "reconstructed_from_interface：由重建领域接口按语法生成并经 check_rule 校验",
+  "support_task_group_ids / unknown_task_group_ids": "not_recoverable：只恢复组数，不恢复建库分区的组标识",
+  "ALF-EXEC-01 / SCI-EXEC-04 / WEB-REJECT-01": "manuscript_anchor：按附录 A.3 原文构造，谓词、程序、校验器逐项核对"
+ },
+ "notes": [
+  "按论文接口重建的冻结规则库导出，用于补足“完整规则清单”的可获取性；不是原始训练产物的逐字节副本，条件集与程序的具体组合属重建结果。",
+  "每条规则通过 traj2rules.rules.check_rule；canonical_form 可用 parse_rule 反解。",
+  "LIB-01/02/03 对应三轮主实验（种子 17/43/89），规则集合相同、运行与种子不同。"
+ ]
+}

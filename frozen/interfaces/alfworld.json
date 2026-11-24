@@ -1,0 +1,191 @@
+{
+ "artifact_kind": "reconstructed_domain_interface",
+ "domain": "alfworld",
+ "registry_version": "reconstructed-v1",
+ "types": [
+  "object",
+  "receptacle"
+ ],
+ "predicates": [
+  {
+   "predicate_id": "goal_requires_store",
+   "argument_types": [
+    "object",
+    "receptacle"
+   ]
+  },
+  {
+   "predicate_id": "goal_requires_clean",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "goal_requires_heat",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "cleaning_confirmed",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "heating_confirmed",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "closed",
+   "argument_types": [
+    "receptacle"
+   ]
+  },
+  {
+   "predicate_id": "opened",
+   "argument_types": [
+    "receptacle"
+   ]
+  },
+  {
+   "predicate_id": "held",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "at_location",
+   "argument_types": [
+    "object",
+    "receptacle"
+   ]
+  },
+  {
+   "predicate_id": "is_clean",
+   "argument_types": [
+    "object"
+   ]
+  },
+  {
+   "predicate_id": "is_container",
+   "argument_types": [
+    "receptacle"
+   ]
+  },
+  {
+   "predicate_id": "is_surface",
+   "argument_types": [
+    "receptacle"
+   ]
+  }
+ ],
+ "templates": [
+  {
+   "tool_id": "take",
+   "parameter_types": [
+    "object"
+   ],
+   "effect_id": "held",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_held",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "move",
+   "parameter_types": [
+    "object",
+    "receptacle"
+   ],
+   "effect_id": "in",
+   "effect_argument_index": [
+    0,
+    1
+   ],
+   "verifier_id": "verify_in",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "open",
+   "parameter_types": [
+    "receptacle"
+   ],
+   "effect_id": "opened",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_opened",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "close",
+   "parameter_types": [
+    "receptacle"
+   ],
+   "effect_id": "closeded",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_closed",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "clean",
+   "parameter_types": [
+    "object"
+   ],
+   "effect_id": "cleaned",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_cleaned",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "heat",
+   "parameter_types": [
+    "object"
+   ],
+   "effect_id": "heated",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_heated",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "cool",
+   "parameter_types": [
+    "object"
+   ],
+   "effect_id": "cooled",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_cooled",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  }
+ ],
+ "checkers": [
+  {
+   "checker_id": "container_state_conflict",
+   "effect_id": "conflict"
+  },
+  {
+   "checker_id": "cleanliness_conflict",
+   "effect_id": "conflict"
+  },
+  {
+   "checker_id": "location_conflict",
+   "effect_id": "conflict"
+  }
+ ],
+ "notes": [
+  "重建的领域接口：谓词、模板、效果与校验器按论文方法附录描述的角色建立，不是原始注册表的实现代码。",
+  "导出规则逐条通过 traj2rules.rules.check_rule；规范化文本可用 parse_rule 反解。"
+ ]
+}

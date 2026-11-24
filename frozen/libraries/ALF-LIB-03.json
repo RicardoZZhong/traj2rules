@@ -1,0 +1,4596 @@
+{
+ "artifact_kind": "reconstructed_frozen_rule_library",
+ "contains_experimental_records": false,
+ "library_metadata": {
+  "domain": "alfworld",
+  "run_id": "R3",
+  "training_library_seed": 89,
+  "generator_model": "qwen3.5-9b-lora",
+  "generator_checkpoint": "ALF-LIB-03",
+  "registry_version": "reconstructed-v1",
+  "library_id": "ALF-LIB-03",
+  "rule_count": 47
+ },
+ "rules": [
+  {
+   "rule_id": "ALF-EXEC-01",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & cleaning_confirmed(X) & closed(D)",
+    "I": "open(D) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_opened ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&cleaning_confirmed(?object0:object)&closed(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_opened;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 118,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 1,
+   "selection_decision": {
+    "selected": true,
+    "support": 118,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "manuscript_anchor"
+  },
+  {
+   "rule_id": "ALF-EXEC-02",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & cleaning_confirmed(X) & closed(D)",
+    "I": "clean(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_cleaned ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&cleaning_confirmed(?object0:object)&closed(?receptacle0:receptacle)|I:clean(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_cleaned;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 116,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 2,
+   "selection_decision": {
+    "selected": true,
+    "support": 116,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-03",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "location_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & at_location(X, D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "location_conflict"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&at_location(?object0:object,?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:location_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 100,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 3,
+   "selection_decision": {
+    "selected": true,
+    "support": 100,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-04",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X) & cleaning_confirmed(X)",
+    "I": "clean(X) ; heat(X)",
+    "K": "X ← action_arg:heat:0",
+    "V": "verify_cleaned ; verify_heated"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)&cleaning_confirmed(?object0:object)|I:clean(?object0:object);heat(?object0:object)|K:?object0:object@action_arg:heat:0|V:verify_cleaned;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 89,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 4,
+   "selection_decision": {
+    "selected": true,
+    "support": 89,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-05",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "heating_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X) & heating_confirmed(X)",
+    "I": "clean(X) ; heat(X)",
+    "K": "X ← action_arg:heat:0",
+    "V": "verify_cleaned ; verify_heated"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)&heating_confirmed(?object0:object)|I:clean(?object0:object);heat(?object0:object)|K:?object0:object@action_arg:heat:0|V:verify_cleaned;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 85,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 5,
+   "selection_decision": {
+    "selected": true,
+    "support": 85,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-06",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X) & held(X) & is_clean(X)",
+    "I": "clean(X) ; heat(X)",
+    "K": "X ← action_arg:heat:0",
+    "V": "verify_cleaned ; verify_heated"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)&held(?object0:object)&is_clean(?object0:object)|I:clean(?object0:object);heat(?object0:object)|K:?object0:object@action_arg:heat:0|V:verify_cleaned;verify_heated|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "heated",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 84,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 6,
+   "selection_decision": {
+    "selected": true,
+    "support": 84,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-07",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & closed(D)",
+    "I": "clean(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_cleaned ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&closed(?receptacle0:receptacle)|I:clean(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_cleaned;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 81,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 7,
+   "selection_decision": {
+    "selected": true,
+    "support": 81,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-08",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X) & held(X)",
+    "I": "clean(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_cleaned ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)&held(?object0:object)|I:clean(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_cleaned;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 72,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 8,
+   "selection_decision": {
+    "selected": true,
+    "support": 72,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-09",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "container_state_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & closed(D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "container_state_conflict"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&closed(?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:container_state_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 72,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 9,
+   "selection_decision": {
+    "selected": true,
+    "support": 72,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-10",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "cleanliness_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X) & is_clean(X)",
+    "I": "clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "cleanliness_conflict"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)&is_clean(?object0:object)|I:clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:cleanliness_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 71,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 10,
+   "selection_decision": {
+    "selected": true,
+    "support": 71,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-11",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "heat:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "cleanliness_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X) & is_clean(X)",
+    "I": "heat(X)",
+    "K": "X ← action_arg:heat:0",
+    "V": "cleanliness_conflict"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)&is_clean(?object0:object)|I:heat(?object0:object)|K:?object0:object@action_arg:heat:0|V:cleanliness_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 66,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 11,
+   "selection_decision": {
+    "selected": true,
+    "support": 66,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-12",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_container",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & is_container(D)",
+    "I": "heat(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_heated ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&is_container(?receptacle0:receptacle)|I:heat(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_heated;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 63,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 12,
+   "selection_decision": {
+    "selected": true,
+    "support": 63,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-13",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "cleanliness_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "cleaning_confirmed(X)",
+    "I": "clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "cleanliness_conflict"
+   },
+   "canonical_form": "C:cleaning_confirmed(?object0:object)|I:clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:cleanliness_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 58,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 13,
+   "selection_decision": {
+    "selected": true,
+    "support": 58,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-14",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X)",
+    "I": "heat(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_heated ; verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)|I:heat(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_heated;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 55,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 14,
+   "selection_decision": {
+    "selected": true,
+    "support": 55,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-15",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X)",
+    "I": "heat(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_heated ; verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)|I:heat(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_heated;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 49,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 15,
+   "selection_decision": {
+    "selected": true,
+    "support": 49,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-16",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "take:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "location_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "held(X) & at_location(X, D)",
+    "I": "take(X)",
+    "K": "X ← action_arg:take:0 ; D ← visible:receptacle",
+    "V": "location_conflict"
+   },
+   "canonical_form": "C:held(?object0:object)&at_location(?object0:object,?receptacle0:receptacle)|I:take(?object0:object)|K:?object0:object@action_arg:take:0;?receptacle0:receptacle@visible:receptacle|V:location_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 44,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 16,
+   "selection_decision": {
+    "selected": true,
+    "support": 44,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-17",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D)",
+    "I": "heat(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_heated ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)|I:heat(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_heated;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 41,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 17,
+   "selection_decision": {
+    "selected": true,
+    "support": 41,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-18",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "cleaning_confirmed(X)",
+    "I": "heat(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_heated ; verify_cleaned"
+   },
+   "canonical_form": "C:cleaning_confirmed(?object0:object)|I:heat(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_heated;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 40,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 18,
+   "selection_decision": {
+    "selected": true,
+    "support": 40,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-19",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "heating_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_heated",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "heated"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "heating_confirmed(X)",
+    "I": "heat(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_heated ; verify_in"
+   },
+   "canonical_form": "C:heating_confirmed(?object0:object)|I:heat(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_heated;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 37,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 19,
+   "selection_decision": {
+    "selected": true,
+    "support": 37,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-20",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_surface",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "at_location(X, D) & is_surface(D)",
+    "I": "open(D) ; clean(X)",
+    "K": "X ← action_arg:clean:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_cleaned"
+   },
+   "canonical_form": "C:at_location(?object0:object,?receptacle0:receptacle)&is_surface(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);clean(?object0:object)|K:?object0:object@action_arg:clean:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 33,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 20,
+   "selection_decision": {
+    "selected": true,
+    "support": 33,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-21",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "at_location(X, D)",
+    "I": "open(D) ; clean(X)",
+    "K": "X ← action_arg:clean:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_cleaned"
+   },
+   "canonical_form": "C:at_location(?object0:object,?receptacle0:receptacle)|I:open(?receptacle0:receptacle);clean(?object0:object)|K:?object0:object@action_arg:clean:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 32,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 21,
+   "selection_decision": {
+    "selected": true,
+    "support": 32,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-22",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "closed(D)",
+    "I": "open(D) ; clean(X)",
+    "K": "X ← action_arg:clean:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_cleaned"
+   },
+   "canonical_form": "C:closed(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);clean(?object0:object)|K:?object0:object@action_arg:clean:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 31,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 22,
+   "selection_decision": {
+    "selected": true,
+    "support": 31,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-23",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "held(X)",
+    "I": "open(D) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_opened ; verify_in"
+   },
+   "canonical_form": "C:held(?object0:object)|I:open(?receptacle0:receptacle);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_opened;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 26,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 23,
+   "selection_decision": {
+    "selected": true,
+    "support": 26,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-24",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "is_clean(X)",
+    "I": "open(D) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_opened ; verify_in"
+   },
+   "canonical_form": "C:is_clean(?object0:object)|I:open(?receptacle0:receptacle);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_opened;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 24,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 24,
+   "selection_decision": {
+    "selected": true,
+    "support": 24,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-25",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_surface",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "location_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "at_location(X, D) & is_surface(D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "location_conflict"
+   },
+   "canonical_form": "C:at_location(?object0:object,?receptacle0:receptacle)&is_surface(?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:location_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 23,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 25,
+   "selection_decision": {
+    "selected": true,
+    "support": 23,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-26",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_container",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "is_container(D)",
+    "I": "open(D) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_opened ; verify_in"
+   },
+   "canonical_form": "C:is_container(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_opened;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 22,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 26,
+   "selection_decision": {
+    "selected": true,
+    "support": 22,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-27",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_surface",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "take:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    }
+   ],
+   "display": {
+    "C": "is_surface(D)",
+    "I": "open(D) ; take(X)",
+    "K": "X ← action_arg:take:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_held"
+   },
+   "canonical_form": "C:is_surface(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);take(?object0:object)|K:?object0:object@action_arg:take:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_held|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "held",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 22,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 27,
+   "selection_decision": {
+    "selected": true,
+    "support": 22,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-28",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "opened",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "take:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    }
+   ],
+   "display": {
+    "C": "opened(D)",
+    "I": "open(D) ; take(X)",
+    "K": "X ← action_arg:take:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_held"
+   },
+   "canonical_form": "C:opened(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);take(?object0:object)|K:?object0:object@action_arg:take:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_held|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "held",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 21,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 28,
+   "selection_decision": {
+    "selected": true,
+    "support": 21,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-29",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "take:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "visible",
+     "source_arguments": [
+      "receptacle"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_opened",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "opened"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & cleaning_confirmed(X) & closed(D)",
+    "I": "open(D) ; take(X)",
+    "K": "X ← action_arg:take:0 ; D ← visible:receptacle",
+    "V": "verify_opened ; verify_held"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&cleaning_confirmed(?object0:object)&closed(?receptacle0:receptacle)|I:open(?receptacle0:receptacle);take(?object0:object)|K:?object0:object@action_arg:take:0;?receptacle0:receptacle@visible:receptacle|V:verify_opened;verify_held|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "held",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 21,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 29,
+   "selection_decision": {
+    "selected": true,
+    "support": 21,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-30",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X) & cleaning_confirmed(X)",
+    "I": "take(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_held ; verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)&cleaning_confirmed(?object0:object)|I:take(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_held;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 20,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 30,
+   "selection_decision": {
+    "selected": true,
+    "support": 20,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-31",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "heating_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X) & heating_confirmed(X)",
+    "I": "take(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_held ; verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)&heating_confirmed(?object0:object)|I:take(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_held;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 20,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 31,
+   "selection_decision": {
+    "selected": true,
+    "support": 20,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-32",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X) & held(X) & is_clean(X)",
+    "I": "take(X) ; clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_held ; verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)&held(?object0:object)&is_clean(?object0:object)|I:take(?object0:object);clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_held;verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 19,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 32,
+   "selection_decision": {
+    "selected": true,
+    "support": 19,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-33",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & closed(D)",
+    "I": "take(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_held ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&closed(?receptacle0:receptacle)|I:take(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_held;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 17,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 33,
+   "selection_decision": {
+    "selected": true,
+    "support": 17,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-34",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X) & held(X)",
+    "I": "take(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_held ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)&held(?object0:object)|I:take(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_held;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 16,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 34,
+   "selection_decision": {
+    "selected": true,
+    "support": 16,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-REJECT-35",
+   "library_id": "ALF-LIB-03",
+   "tau": "reject",
+   "conditions": [
+    {
+     "predicate_id": "opened",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_container",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "open:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "open",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "container_state_conflict",
+     "arguments": [
+      "=attribute:attribute"
+     ],
+     "expected_effect": "conflict"
+    }
+   ],
+   "display": {
+    "C": "opened(D) & is_container(D)",
+    "I": "open(D)",
+    "K": "D ← action_arg:open:0",
+    "V": "container_state_conflict"
+   },
+   "canonical_form": "C:opened(?receptacle0:receptacle)&is_container(?receptacle0:receptacle)|I:open(?receptacle0:receptacle)|K:?receptacle0:receptacle@action_arg:open:0|V:container_state_conflict|tau:reject",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "reject",
+    "effect_id": "conflict",
+    "arguments": [
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 16,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 35,
+   "selection_decision": {
+    "selected": true,
+    "support": 16,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-36",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_container",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "take",
+     "arguments": [
+      "?X:object"
+     ]
+    },
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_held",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "held"
+    },
+    {
+     "step_index": 1,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D) & is_container(D)",
+    "I": "take(X) ; move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_held ; verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)&is_container(?receptacle0:receptacle)|I:take(?object0:object);move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_held;verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 14,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 36,
+   "selection_decision": {
+    "selected": true,
+    "support": 14,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-37",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_clean(X)",
+    "I": "clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_clean(?object0:object)|I:clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 37,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-38",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_heat",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_heat(X)",
+    "I": "clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_cleaned"
+   },
+   "canonical_form": "C:goal_requires_heat(?object0:object)|I:clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 12,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 38,
+   "selection_decision": {
+    "selected": true,
+    "support": 12,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-39",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "goal_requires_store",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "goal_requires_store(X, D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_in"
+   },
+   "canonical_form": "C:goal_requires_store(?object0:object,?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 10,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 39,
+   "selection_decision": {
+    "selected": true,
+    "support": 10,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-40",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "cleaning_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "clean:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cleaned",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cleaned"
+    }
+   ],
+   "display": {
+    "C": "cleaning_confirmed(X)",
+    "I": "clean(X)",
+    "K": "X ← action_arg:clean:0",
+    "V": "verify_cleaned"
+   },
+   "canonical_form": "C:cleaning_confirmed(?object0:object)|I:clean(?object0:object)|K:?object0:object@action_arg:clean:0|V:verify_cleaned|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cleaned",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 10,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 40,
+   "selection_decision": {
+    "selected": true,
+    "support": 10,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-41",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "heating_confirmed",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "cool:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "cool",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cooled",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cooled"
+    }
+   ],
+   "display": {
+    "C": "heating_confirmed(X)",
+    "I": "cool(X)",
+    "K": "X ← action_arg:cool:0",
+    "V": "verify_cooled"
+   },
+   "canonical_form": "C:heating_confirmed(?object0:object)|I:cool(?object0:object)|K:?object0:object@action_arg:cool:0|V:verify_cooled|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cooled",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 9,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 41,
+   "selection_decision": {
+    "selected": true,
+    "support": 9,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-42",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    },
+    {
+     "predicate_id": "is_surface",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "at_location(X, D) & is_surface(D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_in"
+   },
+   "canonical_form": "C:at_location(?object0:object,?receptacle0:receptacle)&is_surface(?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 9,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 42,
+   "selection_decision": {
+    "selected": true,
+    "support": 9,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-43",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "at_location",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:0"
+     ]
+    },
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "move:1"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "move",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_in",
+     "arguments": [
+      "?X:object",
+      "?D:receptacle"
+     ],
+     "expected_effect": "in"
+    }
+   ],
+   "display": {
+    "C": "at_location(X, D)",
+    "I": "move(X, D)",
+    "K": "X ← action_arg:move:0 ; D ← action_arg:move:1",
+    "V": "verify_in"
+   },
+   "canonical_form": "C:at_location(?object0:object,?receptacle0:receptacle)|I:move(?object0:object,?receptacle0:receptacle)|K:?object0:object@action_arg:move:0;?receptacle0:receptacle@action_arg:move:1|V:verify_in|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "in",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ],
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 43,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-44",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "closed",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "close:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "close",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_closed",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "closeded"
+    }
+   ],
+   "display": {
+    "C": "closed(D)",
+    "I": "close(D)",
+    "K": "D ← action_arg:close:0",
+    "V": "verify_closed"
+   },
+   "canonical_form": "C:closed(?receptacle0:receptacle)|I:close(?receptacle0:receptacle)|K:?receptacle0:receptacle@action_arg:close:0|V:verify_closed|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "closeded",
+    "arguments": [
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 44,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-45",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "held",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "cool:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "cool",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cooled",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cooled"
+    }
+   ],
+   "display": {
+    "C": "held(X)",
+    "I": "cool(X)",
+    "K": "X ← action_arg:cool:0",
+    "V": "verify_cooled"
+   },
+   "canonical_form": "C:held(?object0:object)|I:cool(?object0:object)|K:?object0:object@action_arg:cool:0|V:verify_cooled|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cooled",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 8,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 45,
+   "selection_decision": {
+    "selected": true,
+    "support": 8,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-46",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_clean",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "X",
+     "type": "object",
+     "source": "action_arg",
+     "source_arguments": [
+      "cool:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "cool",
+     "arguments": [
+      "?X:object"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_cooled",
+     "arguments": [
+      "?X:object"
+     ],
+     "expected_effect": "cooled"
+    }
+   ],
+   "display": {
+    "C": "is_clean(X)",
+    "I": "cool(X)",
+    "K": "X ← action_arg:cool:0",
+    "V": "verify_cooled"
+   },
+   "canonical_form": "C:is_clean(?object0:object)|I:cool(?object0:object)|K:?object0:object@action_arg:cool:0|V:verify_cooled|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "cooled",
+    "arguments": [
+     [
+      "var",
+      "object"
+     ]
+    ]
+   },
+   "support_task_group_count": 7,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 46,
+   "selection_decision": {
+    "selected": true,
+    "support": 7,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  },
+  {
+   "rule_id": "ALF-EXEC-47",
+   "library_id": "ALF-LIB-03",
+   "tau": "exec",
+   "conditions": [
+    {
+     "predicate_id": "is_container",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "bindings": [
+    {
+     "variable": "D",
+     "type": "receptacle",
+     "source": "action_arg",
+     "source_arguments": [
+      "close:0"
+     ]
+    }
+   ],
+   "program": [
+    {
+     "tool_id": "close",
+     "arguments": [
+      "?D:receptacle"
+     ]
+    }
+   ],
+   "verifiers": [
+    {
+     "step_index": 0,
+     "verifier_id": "verify_closed",
+     "arguments": [
+      "?D:receptacle"
+     ],
+     "expected_effect": "closeded"
+    }
+   ],
+   "display": {
+    "C": "is_container(D)",
+    "I": "close(D)",
+    "K": "D ← action_arg:close:0",
+    "V": "verify_closed"
+   },
+   "canonical_form": "C:is_container(?receptacle0:receptacle)|I:close(?receptacle0:receptacle)|K:?receptacle0:receptacle@action_arg:close:0|V:verify_closed|tau:exec",
+   "effect_signature": {
+    "domain": "alfworld",
+    "tau": "exec",
+    "effect_id": "closeded",
+    "arguments": [
+     [
+      "var",
+      "receptacle"
+     ]
+    ]
+   },
+   "support_task_group_count": 6,
+   "support_task_group_ids": null,
+   "counterexample_task_group_ids": [],
+   "unknown_task_group_ids": null,
+   "selection_rank": 47,
+   "selection_decision": {
+    "selected": true,
+    "support": 6,
+    "counterexamples": 0,
+    "n_min": 3,
+    "capacity": 64,
+    "rank_key": [
+     "negative_positive_group_count",
+     "program_length",
+     "condition_count",
+     "canonical_text"
+    ]
+   },
+   "provenance": "reconstructed_from_interface"
+  }
+ ],
+ "field_provenance": {
+  "rule_id / tau / support_task_group_count / selection_rank / library_id / run_id / seed": "data_derived：二审意见4_规则使用数据.xlsx 的冻结规则清单与论文种子句",
+  "conditions / bindings / program / verifiers / canonical_form / effect_signature": "reconstructed_from_interface：由重建领域接口按语法生成并经 check_rule 校验",
+  "support_task_group_ids / unknown_task_group_ids": "not_recoverable：只恢复组数，不恢复建库分区的组标识",
+  "ALF-EXEC-01 / SCI-EXEC-04 / WEB-REJECT-01": "manuscript_anchor：按附录 A.3 原文构造，谓词、程序、校验器逐项核对"
+ },
+ "notes": [
+  "按论文接口重建的冻结规则库导出，用于补足“完整规则清单”的可获取性；不是原始训练产物的逐字节副本，条件集与程序的具体组合属重建结果。",
+  "每条规则通过 traj2rules.rules.check_rule；canonical_form 可用 parse_rule 反解。",
+  "LIB-01/02/03 对应三轮主实验（种子 17/43/89），规则集合相同、运行与种子不同。"
+ ]
+}

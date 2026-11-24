@@ -1,0 +1,156 @@
+{
+ "artifact_kind": "reconstructed_domain_interface",
+ "domain": "scienceworld",
+ "registry_version": "reconstructed-v1",
+ "types": [
+  "container",
+  "substance"
+ ],
+ "predicates": [
+  {
+   "predicate_id": "mixing_goal_active",
+   "argument_types": []
+  },
+  {
+   "predicate_id": "source_contains_required_paint",
+   "argument_types": [
+    "container"
+   ]
+  },
+  {
+   "predicate_id": "mixing_container_identified",
+   "argument_types": [
+    "container"
+   ]
+  },
+  {
+   "predicate_id": "container_has_substance",
+   "argument_types": [
+    "container",
+    "substance"
+   ]
+  },
+  {
+   "predicate_id": "substance_is_paint",
+   "argument_types": [
+    "substance"
+   ]
+  },
+  {
+   "predicate_id": "goal_requires_temperature",
+   "argument_types": [
+    "container"
+   ]
+  },
+  {
+   "predicate_id": "temperature_reached",
+   "argument_types": [
+    "container"
+   ]
+  },
+  {
+   "predicate_id": "mixture_homogeneous",
+   "argument_types": [
+    "container"
+   ]
+  },
+  {
+   "predicate_id": "container_empty",
+   "argument_types": [
+    "container"
+   ]
+  }
+ ],
+ "templates": [
+  {
+   "tool_id": "pour_contents",
+   "parameter_types": [
+    "container",
+    "container"
+   ],
+   "effect_id": "transferred",
+   "effect_argument_index": [
+    0,
+    1
+   ],
+   "verifier_id": "verify_transfer",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "mix",
+   "parameter_types": [
+    "container"
+   ],
+   "effect_id": "mixed",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_mixed",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "heat_container",
+   "parameter_types": [
+    "container"
+   ],
+   "effect_id": "heated",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_heated",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "filter",
+   "parameter_types": [
+    "container"
+   ],
+   "effect_id": "filtered",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_filtered",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "fill",
+   "parameter_types": [
+    "container",
+    "substance"
+   ],
+   "effect_id": "filled",
+   "effect_argument_index": [
+    0,
+    1
+   ],
+   "verifier_id": "verify_filled",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "empty",
+   "parameter_types": [
+    "container"
+   ],
+   "effect_id": "emptied",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_emptied",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  }
+ ],
+ "checkers": [
+  {
+   "checker_id": "temperature_conflict",
+   "effect_id": "conflict"
+  },
+  {
+   "checker_id": "substance_conflict",
+   "effect_id": "conflict"
+  }
+ ],
+ "notes": [
+  "重建的领域接口：谓词、模板、效果与校验器按论文方法附录描述的角色建立，不是原始注册表的实现代码。",
+  "导出规则逐条通过 traj2rules.rules.check_rule；规范化文本可用 parse_rule 反解。"
+ ]
+}

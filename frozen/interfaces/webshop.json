@@ -1,0 +1,144 @@
+{
+ "artifact_kind": "reconstructed_domain_interface",
+ "domain": "webshop",
+ "registry_version": "reconstructed-v1",
+ "types": [
+  "color",
+  "option",
+  "size"
+ ],
+ "predicates": [
+  {
+   "predicate_id": "is_color_option",
+   "argument_types": [
+    "option"
+   ]
+  },
+  {
+   "predicate_id": "req_color",
+   "argument_types": [
+    "option",
+    "color"
+   ]
+  },
+  {
+   "predicate_id": "opt_color",
+   "argument_types": [
+    "option",
+    "color"
+   ]
+  },
+  {
+   "predicate_id": "is_size_option",
+   "argument_types": [
+    "option"
+   ]
+  },
+  {
+   "predicate_id": "req_size",
+   "argument_types": [
+    "option",
+    "size"
+   ]
+  },
+  {
+   "predicate_id": "opt_size",
+   "argument_types": [
+    "option",
+    "size"
+   ]
+  },
+  {
+   "predicate_id": "price_within_budget",
+   "argument_types": [
+    "option"
+   ]
+  },
+  {
+   "predicate_id": "in_stock",
+   "argument_types": [
+    "option"
+   ]
+  },
+  {
+   "predicate_id": "query_matches",
+   "argument_types": [
+    "option"
+   ]
+  },
+  {
+   "predicate_id": "rating_above_threshold",
+   "argument_types": [
+    "option"
+   ]
+  }
+ ],
+ "templates": [
+  {
+   "tool_id": "click",
+   "parameter_types": [
+    "option"
+   ],
+   "effect_id": "navigated",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_click",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "choose",
+   "parameter_types": [
+    "option",
+    "color"
+   ],
+   "effect_id": "color_selected",
+   "effect_argument_index": [
+    0,
+    1
+   ],
+   "verifier_id": "verify_color_selected",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "pick_size",
+   "parameter_types": [
+    "option",
+    "size"
+   ],
+   "effect_id": "size_selected",
+   "effect_argument_index": [
+    0,
+    1
+   ],
+   "verifier_id": "verify_size_selected",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  },
+  {
+   "tool_id": "buy",
+   "parameter_types": [
+    "option"
+   ],
+   "effect_id": "purchased",
+   "effect_argument_index": [
+    0
+   ],
+   "verifier_id": "verify_purchase",
+   "stage_preconditions": "registered per template; not part of learned conditions"
+  }
+ ],
+ "checkers": [
+  {
+   "checker_id": "attribute_conflict",
+   "effect_id": "conflict"
+  },
+  {
+   "checker_id": "budget_conflict",
+   "effect_id": "conflict"
+  }
+ ],
+ "notes": [
+  "重建的领域接口：谓词、模板、效果与校验器按论文方法附录描述的角色建立，不是原始注册表的实现代码。",
+  "导出规则逐条通过 traj2rules.rules.check_rule；规范化文本可用 parse_rule 反解。"
+ ]
+}
