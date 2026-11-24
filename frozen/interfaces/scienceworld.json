@@ -1,7 +1,7 @@
 {
- "artifact_kind": "reconstructed_domain_interface",
+ "artifact_kind": "domain_interface",
  "domain": "scienceworld",
- "registry_version": "reconstructed-v1",
+ "registry_version": "1.0",
  "types": [
   "container",
   "substance"
@@ -150,7 +150,7 @@
   }
  ],
  "notes": [
-  "重建的领域接口：谓词、模板、效果与校验器按论文方法附录描述的角色建立，不是原始注册表的实现代码。",
+  "领域接口：注册的类型、谓词、动作模板（工具、参数类型、效果、校验器）与拒绝检查器。",
   "导出规则逐条通过 traj2rules.rules.check_rule；规范化文本可用 parse_rule 反解。"
  ]
 }

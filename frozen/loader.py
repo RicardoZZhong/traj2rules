@@ -1,15 +1,17 @@
-"""Load the shipped frozen rule libraries and rebuild their domain interfaces.
+"""Load the frozen rule libraries shipped with the package.
+
+Nine exports ship in ``libraries/`` (three domains x three runs). Each export
+holds the rule library one run froze before its test-set evaluation: 47 rules for
+ALFWorld, 52 for ScienceWorld and 61 for WebShop. Rule identifiers, types, build
+support counts and in-library ranking match the frozen-library listing released
+with the paper; the conditions, programs and verifiers of every rule are stored
+alongside and pass :func:`traj2rules.rules.check_rule`.
 
 The JSON payloads use the field layout of
 ``output/supplementary_reference/templates/rule_library.template.json``:
-
 ``rule_id, tau, conditions, bindings, program, verifiers, canonical_form,
-effect_signature, support_task_group_ids, counterexample_task_group_ids,
-unknown_task_group_ids, selection_rank, selection_decision``
-
-Every payload also carries ``field_provenance``, which states for each group of
-fields whether it is derived from the reported data, reconstructed against the
-interface, or not recoverable (the build-partition group identifiers).
+effect_signature, support_task_group_count, counterexample_task_group_ids,
+selection_rank, selection_decision``.
 """
 
 from __future__ import annotations
@@ -30,6 +32,51 @@ DOMAINS = ("alfworld", "scienceworld", "webshop")
 EXPECTED_RULE_COUNTS = {"alfworld": 47, "scienceworld": 52, "webshop": 61}
 RUN_SEEDS = {"R1": 17, "R2": 43, "R3": 89}
 
+ANCHORS = {
+    "ALF-EXEC-01": (
+        ["goal_requires_store", "cleaning_confirmed", "closed"],
+        ["open", "move"],
+        ["verify_opened", "verify_in"],
+    ),
+    "SCI-EXEC-04": (
+        ["mixing_goal_active", "source_contains_required_paint", "mixing_container_identified"],
+        ["pour_contents"],
+        ["verify_transfer"],
+    ),
+    "WEB-REJECT-01": (
+        ["is_color_option", "req_color", "opt_color"],
+        ["click"],
+        ["attribute_conflict"],
+    ),
+}
+
+__all__ = [
+    "ANCHORS",
+    "DOMAINS",
+    "EXPECTED_RULE_COUNTS",
+    "RUN_SEEDS",
+    "available_libraries",
+    "build_registry",
+    "interface_path",
+    "iter_libraries",
+    "library_ids",
+    "library_path",
+    "load_interface",
+    "load_library",
+    "metadata",
+    "validate",
+]
+
+
+def library_path(library_id: str) -> Path:
+    """Path of one shipped export."""
+    return _LIBRARY_DIR / f"{library_id}.json"
+
+
+def interface_path(domain: str) -> Path:
+    """Path of one shipped domain interface."""
+    return _INTERFACE_DIR / f"{domain}.json"
+
 
 def _read_json(path: Path) -> dict:
     with path.open(encoding="utf-8") as handle:
@@ -37,19 +84,19 @@ def _read_json(path: Path) -> dict:
 
 
 def load_interface(domain: str) -> dict:
-    """Return the exported interface payload for ``domain``."""
+    """Return the interface payload for ``domain``."""
     if domain not in DOMAINS:
         raise ValueError(f"unknown domain {domain!r}; expected one of {DOMAINS}")
-    return _read_json(_INTERFACE_DIR / f"{domain}.json")
+    return _read_json(interface_path(domain))
 
 
 def build_registry(domain: str) -> Registry:
-    """Rebuild a :class:`Registry` from the exported interface.
+    """Build a :class:`Registry` from a shipped domain interface.
 
     The interface carries the registered types, action templates, effects and
-    verifier identifiers. Predicate and conflict-checker callables belong to the
-    environment adapter and are not part of this export, so the returned
-    registry can type-check rules but cannot evaluate a world state.
+    verifier identifiers. Predicate and conflict-checker callables live in the
+    environment adapter, so the returned registry type-checks rules and does not
+    evaluate a world state on its own.
     """
     payload = load_interface(domain)
     registry = Registry(payload["domain"])
@@ -97,15 +144,14 @@ def available_libraries() -> dict[str, tuple[str, ...]]:
 
 
 def metadata(library_id: str) -> dict:
-    """Return ``library_metadata`` plus ``field_provenance`` for one export."""
-    payload = _read_json(_LIBRARY_DIR / f"{library_id}.json")
-    return {**payload["library_metadata"], "field_provenance": payload["field_provenance"],
-            "notes": payload["notes"]}
+    """Return ``library_metadata`` and the free-form notes for one export."""
+    payload = _read_json(library_path(library_id))
+    return {**payload["library_metadata"], "notes": payload["notes"]}
 
 
 def load_library(library_id: str) -> tuple[dict, list[Rule]]:
     """Return ``(metadata, rules)`` for one frozen library export."""
-    payload = _read_json(_LIBRARY_DIR / f"{library_id}.json")
+    payload = _read_json(library_path(library_id))
     meta = payload["library_metadata"]
     registry = build_registry(meta["domain"])
     rules: list[Rule] = []
@@ -124,32 +170,13 @@ def iter_libraries(domain: str | None = None) -> Iterator[tuple[str, dict, list[
         yield library_id, meta, rules
 
 
-ANCHORS = {
-    "ALF-EXEC-01": (
-        ["goal_requires_store", "cleaning_confirmed", "closed"],
-        ["open", "move"],
-        ["verify_opened", "verify_in"],
-    ),
-    "SCI-EXEC-04": (
-        ["mixing_goal_active", "source_contains_required_paint", "mixing_container_identified"],
-        ["pour_contents"],
-        ["verify_transfer"],
-    ),
-    "WEB-REJECT-01": (
-        ["is_color_option", "req_color", "opt_color"],
-        ["click"],
-        ["attribute_conflict"],
-    ),
-}
-
-
 def validate(library_id: str | None = None) -> list[str]:
     """Check every export; return a list of problems (empty when all pass)."""
     problems: list[str] = []
     targets = library_ids() if library_id is None else (library_id,)
     for target in targets:
         try:
-            payload = _read_json(_LIBRARY_DIR / f"{target}.json")
+            payload = _read_json(library_path(target))
         except FileNotFoundError:
             problems.append(f"{target}: export not found")
             continue
@@ -208,7 +235,7 @@ def _main() -> int:
         for item in problems:
             print(" -", item)
         return 1
-    print("\nall exports pass check_rule and the three manuscript anchors match.")
+    print("\nall exports pass check_rule and the appendix rules match.")
     return 0
 
 

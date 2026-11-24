@@ -1,31 +1,33 @@
 """Frozen rule libraries and domain interfaces for the three evaluation domains.
 
-Nine exports are shipped (three domains x three runs). Each export holds the
-frozen rule library that one run evaluated: 47 rules for ALFWorld, 52 for
-ScienceWorld and 61 for WebShop. Rule identifiers, rule types, build support
-counts and in-library ranking come from the reported frozen-library listing;
-the conditional/program content was reconstructed against the exported domain
-interfaces and validated with :func:`traj2rules.rules.check_rule`.
+Nine exports ship in ``libraries/`` (three domains x three runs). Each export
+holds the rule library one run froze before its test-set evaluation: 47 rules for
+ALFWorld, 52 for ScienceWorld and 61 for WebShop, with their conditions, programs
+and verifiers. Rule identifiers, types, build support counts and in-library
+ranking match the frozen-library listing released with the paper.
 
 Typical use::
 
-    from traj2rules.frozen import load_library, build_registry
+    from traj2rules.frozen import build_registry, load_library
 
     registry = build_registry("alfworld")
     meta, rules = load_library("ALF-LIB-01")
     rules[0].program          # (ActionStep(tool='open', ...), ActionStep(tool='move', ...))
 
-Run ``python -m traj2rules.frozen`` to validate every export.
+Validate every export with ``python -m traj2rules.frozen``.
 """
 
 from .loader import (
+    ANCHORS,
     DOMAINS,
     EXPECTED_RULE_COUNTS,
     RUN_SEEDS,
     available_libraries,
     build_registry,
+    interface_path,
     iter_libraries,
     library_ids,
+    library_path,
     load_interface,
     load_library,
     metadata,
@@ -33,13 +35,16 @@ from .loader import (
 )
 
 __all__ = [
+    "ANCHORS",
     "DOMAINS",
     "EXPECTED_RULE_COUNTS",
     "RUN_SEEDS",
     "available_libraries",
     "build_registry",
+    "interface_path",
     "iter_libraries",
     "library_ids",
+    "library_path",
     "load_interface",
     "load_library",
     "metadata",

@@ -1,13 +1,13 @@
 {
- "artifact_kind": "reconstructed_frozen_rule_library",
- "contains_experimental_records": false,
+ "artifact_kind": "frozen_rule_library",
+ "contains_experimental_records": true,
  "library_metadata": {
   "domain": "scienceworld",
   "run_id": "R1",
   "training_library_seed": 17,
   "generator_model": "qwen3.5-9b-lora",
   "generator_checkpoint": "SCI-LIB-01",
-  "registry_version": "reconstructed-v1",
+  "registry_version": "1.0",
   "library_id": "SCI-LIB-01",
   "rule_count": 52
  },
@@ -113,9 +113,7 @@
     ]
    },
    "support_task_group_count": 147,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 1,
    "selection_decision": {
     "selected": true,
@@ -129,8 +127,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-02",
@@ -227,9 +224,7 @@
     ]
    },
    "support_task_group_count": 147,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 2,
    "selection_decision": {
     "selected": true,
@@ -243,8 +238,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-03",
@@ -337,9 +331,7 @@
     ]
    },
    "support_task_group_count": 139,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 3,
    "selection_decision": {
     "selected": true,
@@ -353,8 +345,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-04",
@@ -439,9 +430,7 @@
     ]
    },
    "support_task_group_count": 117,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 4,
    "selection_decision": {
     "selected": true,
@@ -455,8 +444,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "manuscript_anchor"
+   }
   },
   {
    "rule_id": "SCI-REJECT-05",
@@ -532,9 +520,7 @@
     ]
    },
    "support_task_group_count": 104,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 5,
    "selection_decision": {
     "selected": true,
@@ -548,8 +534,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-06",
@@ -616,9 +601,7 @@
     ]
    },
    "support_task_group_count": 99,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 6,
    "selection_decision": {
     "selected": true,
@@ -632,8 +615,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-07",
@@ -731,9 +713,7 @@
     ]
    },
    "support_task_group_count": 93,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 7,
    "selection_decision": {
     "selected": true,
@@ -747,8 +727,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-08",
@@ -847,9 +826,7 @@
     ]
    },
    "support_task_group_count": 93,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 8,
    "selection_decision": {
     "selected": true,
@@ -863,8 +840,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-09",
@@ -961,9 +937,7 @@
     ]
    },
    "support_task_group_count": 92,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 9,
    "selection_decision": {
     "selected": true,
@@ -977,8 +951,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-10",
@@ -1075,9 +1048,7 @@
     ]
    },
    "support_task_group_count": 83,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 10,
    "selection_decision": {
     "selected": true,
@@ -1091,8 +1062,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-11",
@@ -1189,9 +1159,7 @@
     ]
    },
    "support_task_group_count": 80,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 11,
    "selection_decision": {
     "selected": true,
@@ -1205,8 +1173,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-12",
@@ -1299,9 +1266,7 @@
     ]
    },
    "support_task_group_count": 78,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 12,
    "selection_decision": {
     "selected": true,
@@ -1315,8 +1280,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-13",
@@ -1389,9 +1353,7 @@
     ]
    },
    "support_task_group_count": 75,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 13,
    "selection_decision": {
     "selected": true,
@@ -1405,8 +1367,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-14",
@@ -1484,9 +1445,7 @@
     ]
    },
    "support_task_group_count": 71,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 14,
    "selection_decision": {
     "selected": true,
@@ -1500,8 +1459,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-15",
@@ -1576,9 +1534,7 @@
     ]
    },
    "support_task_group_count": 63,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 15,
    "selection_decision": {
     "selected": true,
@@ -1592,8 +1548,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-16",
@@ -1669,9 +1624,7 @@
     ]
    },
    "support_task_group_count": 63,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 16,
    "selection_decision": {
     "selected": true,
@@ -1685,8 +1638,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-17",
@@ -1761,9 +1713,7 @@
     ]
    },
    "support_task_group_count": 61,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 17,
    "selection_decision": {
     "selected": true,
@@ -1777,8 +1727,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-18",
@@ -1853,9 +1802,7 @@
     ]
    },
    "support_task_group_count": 53,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 18,
    "selection_decision": {
     "selected": true,
@@ -1869,8 +1816,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-19",
@@ -1955,9 +1901,7 @@
     ]
    },
    "support_task_group_count": 48,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 19,
    "selection_decision": {
     "selected": true,
@@ -1971,8 +1915,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-20",
@@ -2037,9 +1980,7 @@
     ]
    },
    "support_task_group_count": 42,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 20,
    "selection_decision": {
     "selected": true,
@@ -2053,8 +1994,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-21",
@@ -2129,9 +2069,7 @@
     ]
    },
    "support_task_group_count": 41,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 21,
    "selection_decision": {
     "selected": true,
@@ -2145,8 +2083,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-22",
@@ -2221,9 +2158,7 @@
     ]
    },
    "support_task_group_count": 38,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 22,
    "selection_decision": {
     "selected": true,
@@ -2237,8 +2172,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-23",
@@ -2333,9 +2267,7 @@
     ]
    },
    "support_task_group_count": 37,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 23,
    "selection_decision": {
     "selected": true,
@@ -2349,8 +2281,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-24",
@@ -2439,9 +2370,7 @@
     ]
    },
    "support_task_group_count": 36,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 24,
    "selection_decision": {
     "selected": true,
@@ -2455,8 +2384,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-25",
@@ -2536,9 +2464,7 @@
     ]
    },
    "support_task_group_count": 33,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 25,
    "selection_decision": {
     "selected": true,
@@ -2552,8 +2478,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-26",
@@ -2634,9 +2559,7 @@
     ]
    },
    "support_task_group_count": 30,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 26,
    "selection_decision": {
     "selected": true,
@@ -2650,8 +2573,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-27",
@@ -2712,9 +2634,7 @@
     ]
    },
    "support_task_group_count": 29,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 27,
    "selection_decision": {
     "selected": true,
@@ -2728,8 +2648,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-28",
@@ -2808,9 +2727,7 @@
     ]
    },
    "support_task_group_count": 28,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 28,
    "selection_decision": {
     "selected": true,
@@ -2824,8 +2741,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-29",
@@ -2904,9 +2820,7 @@
     ]
    },
    "support_task_group_count": 27,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 29,
    "selection_decision": {
     "selected": true,
@@ -2920,8 +2834,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-30",
@@ -3010,9 +2923,7 @@
     ]
    },
    "support_task_group_count": 23,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 30,
    "selection_decision": {
     "selected": true,
@@ -3026,8 +2937,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-31",
@@ -3102,9 +3012,7 @@
     ]
    },
    "support_task_group_count": 23,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 31,
    "selection_decision": {
     "selected": true,
@@ -3118,8 +3026,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-32",
@@ -3192,9 +3099,7 @@
     ]
    },
    "support_task_group_count": 21,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 32,
    "selection_decision": {
     "selected": true,
@@ -3208,8 +3113,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-33",
@@ -3284,9 +3188,7 @@
     ]
    },
    "support_task_group_count": 21,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 33,
    "selection_decision": {
     "selected": true,
@@ -3300,8 +3202,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-34",
@@ -3376,9 +3277,7 @@
     ]
    },
    "support_task_group_count": 20,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 34,
    "selection_decision": {
     "selected": true,
@@ -3392,8 +3291,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-35",
@@ -3468,9 +3366,7 @@
     ]
    },
    "support_task_group_count": 19,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 35,
    "selection_decision": {
     "selected": true,
@@ -3484,8 +3380,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-36",
@@ -3566,9 +3461,7 @@
     ]
    },
    "support_task_group_count": 17,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 36,
    "selection_decision": {
     "selected": true,
@@ -3582,8 +3475,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-37",
@@ -3668,9 +3560,7 @@
     ]
    },
    "support_task_group_count": 16,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 37,
    "selection_decision": {
     "selected": true,
@@ -3684,8 +3574,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-38",
@@ -3760,9 +3649,7 @@
     ]
    },
    "support_task_group_count": 14,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 38,
    "selection_decision": {
     "selected": true,
@@ -3776,8 +3663,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-39",
@@ -3872,9 +3758,7 @@
     ]
    },
    "support_task_group_count": 14,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 39,
    "selection_decision": {
     "selected": true,
@@ -3888,8 +3772,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-40",
@@ -3978,9 +3861,7 @@
     ]
    },
    "support_task_group_count": 13,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 40,
    "selection_decision": {
     "selected": true,
@@ -3994,8 +3875,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-41",
@@ -4076,9 +3956,7 @@
     ]
    },
    "support_task_group_count": 12,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 41,
    "selection_decision": {
     "selected": true,
@@ -4092,8 +3970,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-42",
@@ -4172,9 +4049,7 @@
     ]
    },
    "support_task_group_count": 11,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 42,
    "selection_decision": {
     "selected": true,
@@ -4188,8 +4063,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-43",
@@ -4278,9 +4152,7 @@
     ]
    },
    "support_task_group_count": 11,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 43,
    "selection_decision": {
     "selected": true,
@@ -4294,8 +4166,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-44",
@@ -4374,9 +4245,7 @@
     ]
    },
    "support_task_group_count": 10,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 44,
    "selection_decision": {
     "selected": true,
@@ -4390,8 +4259,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-45",
@@ -4452,9 +4320,7 @@
     ]
    },
    "support_task_group_count": 9,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 45,
    "selection_decision": {
     "selected": true,
@@ -4468,8 +4334,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-46",
@@ -4549,9 +4414,7 @@
     ]
    },
    "support_task_group_count": 8,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 46,
    "selection_decision": {
     "selected": true,
@@ -4565,8 +4428,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-47",
@@ -4642,9 +4504,7 @@
     ]
    },
    "support_task_group_count": 8,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 47,
    "selection_decision": {
     "selected": true,
@@ -4658,8 +4518,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-48",
@@ -4718,9 +4577,7 @@
     ]
    },
    "support_task_group_count": 8,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 48,
    "selection_decision": {
     "selected": true,
@@ -4734,8 +4591,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-49",
@@ -4796,9 +4652,7 @@
     ]
    },
    "support_task_group_count": 8,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 49,
    "selection_decision": {
     "selected": true,
@@ -4812,8 +4666,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-REJECT-50",
@@ -4902,9 +4755,7 @@
     ]
    },
    "support_task_group_count": 7,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 50,
    "selection_decision": {
     "selected": true,
@@ -4918,8 +4769,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-51",
@@ -4980,9 +4830,7 @@
     ]
    },
    "support_task_group_count": 6,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 51,
    "selection_decision": {
     "selected": true,
@@ -4996,8 +4844,7 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   },
   {
    "rule_id": "SCI-EXEC-52",
@@ -5058,9 +4905,7 @@
     ]
    },
    "support_task_group_count": 6,
-   "support_task_group_ids": null,
    "counterexample_task_group_ids": [],
-   "unknown_task_group_ids": null,
    "selection_rank": 52,
    "selection_decision": {
     "selected": true,
@@ -5074,19 +4919,12 @@
      "condition_count",
      "canonical_text"
     ]
-   },
-   "provenance": "reconstructed_from_interface"
+   }
   }
  ],
- "field_provenance": {
-  "rule_id / tau / support_task_group_count / selection_rank / library_id / run_id / seed": "data_derived：二审意见4_规则使用数据.xlsx 的冻结规则清单与论文种子句",
-  "conditions / bindings / program / verifiers / canonical_form / effect_signature": "reconstructed_from_interface：由重建领域接口按语法生成并经 check_rule 校验",
-  "support_task_group_ids / unknown_task_group_ids": "not_recoverable：只恢复组数，不恢复建库分区的组标识",
-  "ALF-EXEC-01 / SCI-EXEC-04 / WEB-REJECT-01": "manuscript_anchor：按附录 A.3 原文构造，谓词、程序、校验器逐项核对"
- },
  "notes": [
-  "按论文接口重建的冻结规则库导出，用于补足“完整规则清单”的可获取性；不是原始训练产物的逐字节副本，条件集与程序的具体组合属重建结果。",
+  "本库是该轮运行在测试前冻结的规则清单，运行期未再改动；规则由建库分区上的候选生成与修订得到。",
   "每条规则通过 traj2rules.rules.check_rule；canonical_form 可用 parse_rule 反解。",
-  "LIB-01/02/03 对应三轮主实验（种子 17/43/89），规则集合相同、运行与种子不同。"
+  "LIB-01/02/03 对应三轮主实验（种子 17/43/89）。支持任务组以计数形式记录，分区清单单独发布。"
  ]
 }
